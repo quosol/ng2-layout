@@ -1,0 +1,285 @@
+* {
+    /* border: 1px solid red; */
+}
+
+html,
+body {
+    min-height: 100%;
+    --iatec-menu-width: 350px;
+    --iatec-header-height: 60px;
+    --iatec-content-margin-left: 350px;
+    --iatec-content-background: white;
+}
+
+a.paint-a div {
+    color: #337ab7;
+}
+
+body {
+    background-color: white;
+}
+
+header {
+    background-color: #0071BB;
+    width: 100%;
+    height: 60px;
+    display: table;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+header>* {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+}
+
+header aside {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 350px;
+    min-width: 350px;
+}
+
+header aside img.logo {
+    height: 35px;
+    width: auto !important;
+    position: relative;
+}
+
+header aside .btn-menu {
+    float: right;
+    border: none;
+    background: transparent;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+header aside .btn-menu:focus {
+    outline: none;
+}
+
+header aside .btn-menu:active {
+    opacity: .7;
+}
+
+header aside.profile {
+    font-size: 16px;
+    text-align: right;
+}
+
+header aside.profile .budget {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    color: #666666;
+}
+
+header aside.profile .label {
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    background-color: #00B00B;
+    font-size: 9pt;
+    text-align: center;
+    border-radius: 0px;
+    font-weight: unset;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+header aside.profile img {
+    margin-left: 4px;
+    margin-right: 4px;
+    position: relative;
+}
+
+header nav h5>*>a,
+header nav h5>*>a:link,
+header nav h5>*>a:hover,
+header nav h5>*>a:target,
+header nav h5>*>a:visited,
+header aside.profile>div>a,
+header aside.profile>div>a:link,
+header aside.profile>div>a:target,
+header aside.profile>div>a:visited,
+header aside.profile>div>a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+section.content {
+    position: relative;
+    margin-top: 60px;
+    margin-left: 0px;
+    will-change: margin;
+    transition-property: margin;
+}
+
+section.content .iatec-loading {
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .2);
+    will-change: opacity, width;
+    transition-property: opacity, width;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-duration: .658s;
+}
+
+body.menuOpen section.content {
+    margin-left: 350px;
+}
+
+body.menuOpen section.content .iatec-loading {
+    width: calc(100% - 350px);
+}
+
+body.menuOpen section.menu {
+    transform: translateX(0px);
+}
+
+body.menuOpen section.menu nav.menu-float {
+    width: calc(100vw - 350px);
+}
+
+body.menu-float-active {
+    overflow: hidden;
+}
+
+body.menu-float-active section.content {
+    filter: blur(5px);
+}
+
+body.menu-float-active section.menu nav.menu-float {
+    opacity: 1;
+    pointer-events: all;
+}
+
+section.menu {
+    border-right: 1px solid #DDE5EA;
+    height: calc(100vh - 60px);
+    width: 350px;
+    position: fixed;
+    left: 0px;
+    top: 60px;
+    z-index: 9;
+    background-color: white;
+    will-change: transform;
+    transition-property: transform;
+    transform: translateX(-100%);
+}
+
+
+/* Animate Menu */
+
+section.menu,
+nav.menu-float,
+section.content {
+    transition-duration: .658s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+section.menu .search {
+    position: relative;
+    background-color: #DDE5EA;
+}
+
+section.menu .search::before {
+    position: absolute;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: '\f002';
+    color: #767676;
+    font-size: 16px;
+    font-weight: bold;
+    top: 12px;
+    left: 15px;
+}
+
+section.menu .search input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    text-decoration-color: #767676;
+    padding: 10px;
+    padding-left: 10px;
+    width: 100%;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+section.menu>nav {
+    overflow-y: hidden;
+    height: calc(100% - 80px);
+}
+
+section.menu>nav:not([class]):hover {
+    overflow-y: auto;
+    overflow-y: overlay;
+}
+
+section.menu nav::-webkit-scrollbar {
+    width: 3px;
+    background: transparent;
+}
+
+section.menu nav::-webkit-scrollbar-thumb,
+section .menu nav div.menu::-webkit-scrollbar-thumb {
+    background: rgba(17, 136, 202, 0.50);
+    /* background-color: #DDE5EA */
+}
+
+section.menu nav.menu-float {
+    position: absolute;
+    top: 0px;
+    margin-left: 350px;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background-clip: padding-box;
+    background-color: rgba(255, 255, 255, .93);
+    opacity: 0;
+    padding: 10px;
+    overflow-y: unset;
+    pointer-events: none;
+}
+
+section.menu nav div.menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+/* TODO: Remove if not fixed in root menu */
+/* section.menu nav.menu-float>a{
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+section.menu nav.menu-float > a:hover i{
+    text-decoration: none;
+} */
+
+section.menu footer {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top: 1px solid #DDE5EA;
+    text-align: center;
+    color: gray;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.dropdown-with-arrow {
+    width: 420px;
+    padding: 20px;
+    font: 15px 'Myriad Pro', sans-serif;
+    right: -17px !important;
+    top: 40px;
+    text-align: left;
+}

@@ -1,0 +1,106 @@
+:host {
+    display: block;
+}
+
+a:not(href) {
+    cursor: pointer;
+}
+
+header {
+    background-color: #0071BB;
+    width: 100%;
+    height: 60px;
+    display: table;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+header>* {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+}
+
+header aside {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 350px;
+    min-width: 350px;
+}
+
+header aside img.logo {
+    height: 35px;
+    width: auto !important;
+    position: relative;
+    cursor: pointer;
+}
+
+header aside .btn-menu {
+    float: right;
+    border: none;
+    background: transparent;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+header aside .btn-menu:focus {
+    outline: none;
+}
+
+header aside .btn-menu:active {
+    opacity: .7;
+}
+
+header aside.profile {
+    font-size: 16px;
+    text-align: right;
+}
+
+header aside.profile .budget {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    color: #666666;
+}
+
+header aside.profile .label {
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    background-color: #00B00B;
+    font-size: 9pt;
+    text-align: center;
+    border-radius: 0px;
+    font-weight: unset;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+}
+
+header aside.profile img {
+    margin-left: 4px;
+    margin-right: 4px;
+    position: relative;
+}
+
+header nav h5>*>a,
+header nav h5>*>a:link,
+header nav h5>*>a:hover,
+header nav h5>*>a:target,
+header nav h5>*>a:visited,
+header aside.profile>div>a,
+header aside.profile>div>a:link,
+header aside.profile>div>a:target,
+header aside.profile>div>a:visited,
+header aside.profile>div>a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-no-radius, .btn-no-radius .btn {
+    border-radius: unset;
+}
+    

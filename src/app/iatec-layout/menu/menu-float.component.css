@@ -1,0 +1,151 @@
+:host {
+    display: block;
+}
+
+nav.menu-float .menu {
+    /*width: 98%;*/
+    margin: 50px -10px;
+    overflow-y: auto;
+    height: 92%;
+    padding: 0px 20px;
+}
+
+nav.menu-float .control-exibition {
+    margin-right: 20px;
+    position: absolute;
+    right: 0px;
+    top: 15px;
+}
+
+nav.menu-float .control-exibition div:first-child {
+    margin-bottom: 30px;
+}
+
+nav.menu-float .control-exibition a {
+    margin-left: 10px;
+}
+
+nav.menu-float .control-exibition a.active {
+    color: #868e96;
+}
+
+nav.menu-float .menu a {
+    color: black;
+}
+
+nav.menu-float .menu a:not([href]):hover div {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+nav.menu-float .menu .box-large {
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+    min-height: 280px;
+    padding: 10px;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+nav.menu-float .menu .box-large>div {
+    font-size: 16px;
+}
+
+nav.menu-float .menu .box-large .glyphicon,
+nav.menu-float .menu .box-large .fa {
+    font-size: 70px;
+    font-weight: 100;
+    color: #0071BB;
+    cursor: pointer;
+    margin: 10px;
+}
+
+nav.menu-float .menu .box-large ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+nav.menu-float .menu .box-large ul li {
+    display: inline-block;
+    color: gray;
+}
+
+nav.menu-float .menu .box-large ul li:not(:last-child)::after {
+    content: ',\00a0';
+    display: inline;
+}
+
+nav.menu-float .menu .box-large ul li i {
+    display: none;
+}
+
+nav.menu-float .menu .box-large ul li a {
+    color: gray;
+}
+
+nav.menu-float .menu .box-list-block {
+    width: 30%;
+    margin-right: 3%;
+    display: inline-table;
+    margin-bottom: 8px;
+}
+
+nav.menu-float .menu .box-list-block>a>div {
+    display: inline;
+}
+
+nav.menu-float .menu .box-list-block>div {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 3px;
+    font-size: 18px;
+}
+
+nav.menu-float .menu .box-list-block ul {
+    padding: 10px;
+    list-style-type: none;
+}
+
+nav.menu-float .menu .box-list-block ul li i {
+    color: #666;
+}
+
+nav.menu-float .menu .box-list-block ul li a {
+    color: #337ab7;
+}
+
+nav.menu-float .menu .box-list {
+    margin-right: 3%;
+    margin-bottom: 8px;
+}
+
+nav.menu-float .menu .box-list>a>div {
+    display: inline;
+}
+
+nav.menu-float .menu .box-list>div {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 3px;
+    font-size: 18px;
+}
+
+nav.menu-float .menu .box-list ul {
+    padding: 10px;
+    list-style-type: none;
+}
+
+nav.menu-float .menu .box-list ul li i {
+    color: #666;
+}
+
+nav.menu-float .menu .box-list ul li a {
+    color: #337ab7;
+}
+
+.menu-float .breadcrumb {
+    border-radius: 0px;
+    background: white;
+    /* border-bottom: 1px solid silver; */
+    margin: -10px;
+    padding: 15px;
+}

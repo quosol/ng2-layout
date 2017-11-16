@@ -1,0 +1,13 @@
+<section class="content">
+    <div *ngIf="loading" class="iatec-loading">
+        <div style="position: absolute; top:50%; left:50%; margin: -50px 0 0 -50px;">
+            <div class="iatec-busy">
+                <div class='sprite-busy s1'></div>
+                <div class='sprite-busy s2'></div>
+                <div class='sprite-busy s3'></div>
+                <div class='sprite-busy s4'></div>
+            </div>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</section>

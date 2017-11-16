@@ -1,0 +1,26 @@
+<section class="menu">
+    <div class="search">
+        <input placeholder="{{ labelPlaceholder || 'Type your search here'}}" [(ngModel)]="keySearch" (keyup)="filterMenu($event)"
+        />
+    </div>
+    <nav>
+        <ul class="menu-root">
+            <div *ngIf="loading" style="padding: 10px;">{{ labelLoading || 'Loading ...'}}</div>
+            <!-- Favorite Menu -->
+            <iatec-menu-item *ngIf="!keySearch && menuItemFavorite?.length > 0" [item]="favoriteItem" #favority>
+                <ul>
+                    <iatec-menu-item *ngFor="let item of menuItemFavorite" [item]="item" (clickMenu)="onClickMyFavority($event)"></iatec-menu-item>
+                </ul>
+            </iatec-menu-item>
+            <!-- Tree menu -->
+            <iatec-tree-menu *ngIf="!keySearch" [ngModel]="value" [parentId]="parentId" [templateMenuItem]="templateMenuItem" (clickMenu)="onClickMenu($event)" (clickFavorite)="onClickFavorite($event)"
+                (showFloatMenu)="onShowFloatMenu($event)"></iatec-tree-menu>
+            <!-- Search Menu -->
+            <iatec-menu-item *ngFor="let item of menuItemSearch" [item]="item" [template]="templateMenuItem" (clickMenu)="onClickSearch($event)"></iatec-menu-item>
+        </ul>
+    </nav>
+    <iatec-menu-float [labelFavorite]="favoriteItem.menuItemModel.title" [favorites]="menuItemFavorite" [ngModel]="value" [(id)]="idRootFloatMenu" [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
+    <footer>
+        {{ labelVersion || 'Version' }}: {{ version || 'unknow' }}
+    </footer>
+</section>

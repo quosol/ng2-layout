@@ -1,0 +1,57 @@
+<nav class="menu-float">
+    <div class="control-exibition">
+        <div class="pull-right">
+            <a (click)="onClose($event)">
+                <i class="fa fa-close" aria-hidden="true">&nbsp;</i>
+            </a>
+        </div>
+        <div>
+            <div class="btn-group">
+                <a (click)='changeTypeMenu("box-large")' [class.active]="typeMenu == 'box-large'">
+                    <span class="glyphicon glyphicon-th"></span>
+                </a>
+                <a (click)='changeTypeMenu("box-list-block")' [class.active]="typeMenu == 'box-list-block'">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </a>
+                <a (click)='changeTypeMenu("box-list")' [class.active]="typeMenu == 'box-list'">
+                    <span class="glyphicon glyphicon-align-justify"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <ol class="breadcrumb">
+        <!-- Menu control template -->
+        <li *ngFor="let item of breadcrumbItems">
+            <a (click)="setRootId(item)">{{item.title}}</a>
+        </li>
+    </ol>
+    <div class="menu">
+        <!-- Float menu right -->
+        <!-- <div *ngIf="favorites?.length > 0 && rootId == parentId" [class]="typeMenu" (click)="loadFavorite()">
+            <a [ngClass]="{'paint-a': typeMenu != 'box-large'}">
+                <i class="fa fa-star" style="color: orange;"></i>
+                <div style="font-weight: 600;">{{ labelFavorite || 'Favorite' }}</div>
+            </a>
+            <ul>
+                <li *ngFor="let itemAux of favorites">
+                    <i [class]="itemAux.menuItemModel.iconClass">&nbsp;</i>
+                    <a (click)="setRootId(itemAux.menuItemModel)">{{itemAux.menuItemModel.title}}</a>
+                </li>
+            </ul>
+        </div> -->
+
+        <div *ngFor="let item of items" [class]="typeMenu" (click)="setRootId(item)">
+            <a [ngClass]="{'paint-a': item.childrens.length == 0 && typeMenu != 'box-large'}">
+                <i [class]="item.iconClass"></i>
+                <div [style.font-weight]="item.childrens.length > 0 ? 600 : 0">{{item.title}}</div>
+            </a>
+            <ul *ngIf="item.childrens.length > 0">
+                <li *ngFor="let itemAux of item.childrens">
+                    <i [class]="itemAux.iconClass">&nbsp;</i>
+                    <a *ngIf="itemAux.id" (click)="setRootId(itemAux)">{{itemAux.title}}</a>
+                    <span *ngIf="!itemAux.id">{{itemAux.title}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
