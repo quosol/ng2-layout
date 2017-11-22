@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { IatecLayoutModule } from './iatec-layout/iatec-layout.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([{ path: '', component: AppComponent }])
+    FormsModule,
+    RouterModule.forRoot([{ path: '', component: AppComponent }]),
+    IatecLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

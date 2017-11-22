@@ -5,6 +5,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { MenuItemModel } from '../models';
 import { InternalMenuItemModel } from '../models/internal-menu-item.model';
 import { MenuItemComponent } from './menu-item.component';
+import { ItemEventInterface } from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-tree-menu',
@@ -25,11 +26,12 @@ export class TreeMenuComponent implements ControlValueAccessor {
 
     @Input() parentId: number | string;
     @Input() templateMenuItem: TemplateRef<any>;
-    @Output() showFloatMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
-    @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() showFloatMenu: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
+    @Output() clickMenu: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 
-    public onClick(item: MenuItemModel): void {
+    public onClick(itemEvent: ItemEventInterface): void {
+        let item = itemEvent.item;
         this.menuItemComponents.forEach(mic => {
             if (mic.item.menuItemModel != item)
                 mic.setActive(mic.item.menuItemModel == item);
@@ -45,17 +47,16 @@ export class TreeMenuComponent implements ControlValueAccessor {
             });
         });
 
-        this.dispatchEvent(item);
+        this.dispatchEvent(itemEvent);
     }
 
-    public dispatchEvent(item: MenuItemModel): void {
-        let ev = <MouseEvent>(event || window.event);
- 
+    public dispatchEvent(itemEvent: ItemEventInterface): void {
+        let item = itemEvent.item;
         if (item.target == null) {
-            if(!(ev.clientX > 300))
-                this.showFloatMenu.next(item);
+            if(!(itemEvent.mouseEvent.clientX > 300))
+                this.showFloatMenu.next(itemEvent);
         } else {
-            this.clickMenu.next(item);
+            this.clickMenu.next(itemEvent);
         }
     }
 

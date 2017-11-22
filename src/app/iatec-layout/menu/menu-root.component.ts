@@ -6,6 +6,7 @@ import { MenuItemModel } from '../models';
 import { InternalMenuItemModel } from '../models/internal-menu-item.model';
 import { TreeMenuComponent } from './tree-menu.component';
 import { MenuItemComponent } from './menu-item.component';
+import { ItemEventInterface } from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-layout-menu',
@@ -140,24 +141,24 @@ export class MenuRootComponent implements ControlValueAccessor {
         } catch (ex) { }
     }
 
-    public onClickMenu(item: MenuItemModel): void {
+    public onClickMenu(itemEvent: ItemEventInterface): void {
         this.idRootFloatMenu = null;
         this.closeFavorite();
-        this.clickMenu.next(item);
+        this.clickMenu.next(itemEvent.item);
     }
 
     public onClickMenuFloat(item: MenuItemModel): void {
         this.resetMenusActive();
         this.setMenuParentsActive(this.value, item.id);
-        this.onClickMenu(item);
+        this.onClickMenu(<ItemEventInterface>{ item: item });
     }
 
-    public onClickSearch(item: MenuItemModel): void {
+    public onClickSearch(itemEvent: ItemEventInterface): void {
         this.menuItemSearch = null;
         this.keySearch = "";
-        this.onClickMenu(item);
+        this.onClickMenu(itemEvent);
         this.resetMenusActive();
-        this.setMenuParentsActive(this.value, item.id);
+        this.setMenuParentsActive(this.value, itemEvent.item.id);
     }
 
     public onClickFavorite(item: MenuItemModel): void {
@@ -165,15 +166,15 @@ export class MenuRootComponent implements ControlValueAccessor {
         this.clickFavorite.next(item);
     }
 
-    public onClickMyFavority(item: MenuItemModel): void {
+    public onClickMyFavority(itemEvent: ItemEventInterface): void {
         this.reorganizeMenu = false;
         this.resetMenusActive();
-        this.setMenuParentsActive(this.value, item.id);
-        this.onClickMenu(item);
+        this.setMenuParentsActive(this.value, itemEvent.item.id);
+        this.onClickMenu(itemEvent);
     }
 
-    public onShowFloatMenu(item: MenuItemModel): void {
-        this.idRootFloatMenu = item.id;
+    public onShowFloatMenu(itemEvent: ItemEventInterface): void {
+        this.idRootFloatMenu = itemEvent.item.id;
         this.closeFavorite();
     }
 

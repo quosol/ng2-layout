@@ -22,7 +22,7 @@
     <ol class="breadcrumb">
         <!-- Menu control template -->
         <li *ngFor="let item of breadcrumbItems">
-            <a (click)="setRootId(item)">{{item.title}}</a>
+            <a (click)="setRootId(item, $event)">{{item.title}}</a>
         </li>
     </ol>
     <div class="menu">
@@ -40,7 +40,7 @@
             </ul>
         </div> -->
 
-        <div *ngFor="let item of items" [class]="typeMenu" (click)="setRootId(item)">
+        <div *ngFor="let item of items" [class]="typeMenu" (click)="setRootId(item, $event)">
             <a [ngClass]="{'paint-a': item.childrens.length == 0 && typeMenu != 'box-large'}">
                 <i [class]="item.iconClass"></i>
                 <div [style.font-weight]="item.childrens.length > 0 ? 600 : 0">{{item.title}}</div>
@@ -48,7 +48,7 @@
             <ul *ngIf="item.childrens.length > 0">
                 <li *ngFor="let itemAux of item.childrens">
                     <i [class]="itemAux.iconClass">&nbsp;</i>
-                    <a *ngIf="itemAux.id" (click)="setRootId(itemAux)">{{itemAux.title}}</a>
+                    <a *ngIf="itemAux.id" (click)="setRootId(itemAux, $event)">{{itemAux.title}}</a>
                     <span *ngIf="!itemAux.id">{{itemAux.title}}</span>
                 </li>
             </ul>

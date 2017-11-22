@@ -45,8 +45,8 @@ const myDirectives = [
 export class IatecLayoutModule {
     constructor() {
         let version = appVersion;
-        let dev_info_css = "font-size:25px; font-family: 'Oswald', sans-serif;";
-        console.info("%cIA%cTec %c</> %cdeveloping with passion", dev_info_css, dev_info_css + "color: #1189CA;", "", "color: gray; font-family: arial, tahoma, verdana;");
+        let dev_info_css = "font-size:25px; font-family: 'Oswald', sans-serif; color: black;";
+        console.info("%cIA%cTec %c</> %cdeveloping with passion", dev_info_css, dev_info_css + "color: #1189CA;", "color: black;", "color: gray; font-family: arial, tahoma, verdana;");
         console.info("Current layout version: " + version + ", latest version: %c                ", "background-image: url('https://badge.fury.io/js/%40iatec%2Fng2-layout.svg'); background-repeat: no-repeat; background-postion: center; background-size: contain;");
     }
 }

@@ -8,3 +8,18 @@
         </td>
     </tr>
 </table>
+
+<iatec-layout-css></iatec-layout-css>
+<iatec-layout-menu 
+[loading]="false" 
+[ngModel]="menus"
+[parentId]="0"
+(clickMenu)="onClickMenu($event)"
+(clickFavorite)="onClickFavorite($event)"
+version="1.0.0"
+>
+<!-- Custom menu template -->
+<!-- <ng-template #templateMenuItem let-item>
+    <i [class]="item.iconClass"></i> {{item.title}} <span class="badge">{{item.id}}</span>    
+</ng-template>  -->
+</iatec-layout-menu>

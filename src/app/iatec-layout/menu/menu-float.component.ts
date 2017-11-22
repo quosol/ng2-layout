@@ -67,7 +67,7 @@ export class MenuFloatComponent implements ControlValueAccessor {
         this.items = this.favorites.map(x => new FloatMenuItemModel(x.menuItemModel));
     }
 
-    public setRootId(item: MenuItemModel): void {
+    public setRootId(item: MenuItemModel, event: MouseEvent): void {
         event.stopPropagation();
 
         if (item.target == null) {
