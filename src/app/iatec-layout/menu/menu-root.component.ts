@@ -31,6 +31,7 @@ export class MenuRootComponent implements ControlValueAccessor {
     @Input() labelLoading: string;
     @Input() loading: boolean = false;
     @Input() parentId: number | string;
+    @Input() iconClassLarge: string;
 
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();

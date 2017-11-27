@@ -36,6 +36,8 @@ export class MenuFloatComponent implements ControlValueAccessor {
         this.rootId = value;
         this.render();
     }
+    @Input() iconClassLarge: string;
+
     @Output() idChange: EventEmitter<string | number> = new EventEmitter<string | number>();
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 

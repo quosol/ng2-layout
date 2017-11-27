@@ -42,7 +42,7 @@
 
         <div *ngFor="let item of items" [class]="typeMenu" (click)="setRootId(item, $event)">
             <a [ngClass]="{'paint-a': item.childrens.length == 0 && typeMenu != 'box-large'}">
-                <i [class]="item.iconClass"></i>
+                <i [class]="item.iconClass + (iconClassLarge == null ? '' : ' '+iconClassLarge)"></i>
                 <div [style.font-weight]="item.childrens.length > 0 ? 600 : 0">{{item.title}}</div>
             </a>
             <ul *ngIf="item.childrens.length > 0">

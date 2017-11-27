@@ -19,7 +19,7 @@
             <iatec-menu-item *ngFor="let item of menuItemSearch" [item]="item" [template]="templateMenuItem" (clickMenu)="onClickSearch($event)"></iatec-menu-item>
         </ul>
     </nav>
-    <iatec-menu-float [labelFavorite]="favoriteItem.menuItemModel.title" [favorites]="menuItemFavorite" [ngModel]="value" [(id)]="idRootFloatMenu" [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
+    <iatec-menu-float [(id)]="idRootFloatMenu" [labelFavorite]="favoriteItem.menuItemModel.title" [favorites]="menuItemFavorite" [ngModel]="value" [iconClassLarge]="iconClassLarge" [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
     <footer>
         {{ labelVersion || 'Version' }}: {{ version || 'unknow' }}
     </footer>
