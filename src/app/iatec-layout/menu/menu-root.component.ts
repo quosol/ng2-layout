@@ -40,10 +40,10 @@ export class MenuRootComponent implements ControlValueAccessor {
     @ViewChild('favority') private favorite: MenuItemComponent;
     @ContentChild('templateMenuItem') public templateMenuItem: TemplateRef<any>;
 
-    public value: Array<InternalMenuItemModel>;
+    public value: Array<InternalMenuItemModel> = [];
     public keySearch: string = "";
-    public menuItemSearch: Array<InternalMenuItemModel>;
-    public menuItemFavorite: Array<InternalMenuItemModel>;
+    public menuItemSearch: Array<InternalMenuItemModel> = [];
+    public menuItemFavorite: Array<InternalMenuItemModel> = [];
     public idRootFloatMenu: string | number;
     public favoriteItem: InternalMenuItemModel = <InternalMenuItemModel>{
         menuItemModel: <MenuItemModel>{
