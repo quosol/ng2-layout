@@ -42,13 +42,17 @@
 
         <div *ngFor="let item of items" [class]="typeMenu" (click)="setRootId(item, $event)">
             <a [ngClass]="{'paint-a': item.childrens.length == 0 && typeMenu != 'box-large'}">
-                <i [class]="item.iconClass + (iconClassLarge == null ? '' : ' '+iconClassLarge)"></i>
-                <div [style.font-weight]="item.childrens.length > 0 ? 600 : 0">{{item.title}}</div>
+                <i *ngIf="!layoutMain" [class]="item.iconClass + (iconClassLarge == null ? '' : ' '+iconClassLarge)"></i>
+                <div *ngIf="!layoutMain" [style.font-weight]="item.childrens.length > 0 ? 600 : 0">{{item.title}}</div>
+                <ng-template *ngIf="layoutMain" ngFor [ngForOf]="[item]" [ngForTemplate]="layoutMain"></ng-template>
             </a>
             <ul *ngIf="item.childrens.length > 0">
                 <li *ngFor="let itemAux of item.childrens">
                     <i [class]="itemAux.iconClass">&nbsp;</i>
-                    <a *ngIf="itemAux.id" (click)="setRootId(itemAux, $event)">{{itemAux.title}}</a>
+                    <a *ngIf="itemAux.id" (click)="setRootId(itemAux, $event)">
+                        <span *ngIf="!layoutList">{{itemAux.title}}</span>
+                        <ng-template *ngIf="layoutList" ngFor [ngForOf]="[itemAux]" [ngForTemplate]="layoutList"></ng-template>                        
+                    </a>
                     <span *ngIf="!itemAux.id">{{itemAux.title}}</span>
                 </li>
             </ul>

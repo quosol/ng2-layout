@@ -39,6 +39,8 @@ export class MenuRootComponent implements ControlValueAccessor {
     @ViewChild(TreeMenuComponent) private treeMenuComponent: TreeMenuComponent;
     @ViewChild('favority') private favorite: MenuItemComponent;
     @ContentChild('templateMenuItem') public templateMenuItem: TemplateRef<any>;
+    @ContentChild('templateFloatMain') public templateFloatMain: TemplateRef<any>;
+    @ContentChild('templateFloatList') public templateFloatList: TemplateRef<any>;
 
     public value: Array<InternalMenuItemModel> = [];
     public keySearch: string = "";
@@ -108,7 +110,7 @@ export class MenuRootComponent implements ControlValueAccessor {
     }
 
     private mRegex(value): string {
-        var accents = {
+        let accents = {
             a: 'àáâãäåæ',
             c: 'ç',
             e: 'èéêëæ',
@@ -119,7 +121,7 @@ export class MenuRootComponent implements ControlValueAccessor {
             u: 'ùúûü',
             y: 'ÿ'
         },
-            chars = /[aceinosuy]/g;
+        chars = /[aceinosuy]/g;
         return value.replace(chars, function (c) {
             return '[' + c + accents[c] + ']';
         });

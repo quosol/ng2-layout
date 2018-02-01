@@ -1,4 +1,4 @@
-﻿import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, forwardRef, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { MenuItemModel, FloatMenuItemModel } from '../models';
@@ -37,6 +37,8 @@ export class MenuFloatComponent implements ControlValueAccessor {
         this.render();
     }
     @Input() iconClassLarge: string;
+    @Input() layoutMain: TemplateRef<any>;
+    @Input() layoutList: TemplateRef<any>;
 
     @Output() idChange: EventEmitter<string | number> = new EventEmitter<string | number>();
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
