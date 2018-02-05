@@ -2,7 +2,7 @@
     <div class="control-exibition">
         <div class="pull-right">
             <a (click)="onClose($event)">
-                <i class="fa fa-close" aria-hidden="true">&nbsp;</i>
+                <i class="fas fa-times" aria-hidden="true">&nbsp;</i>
             </a>
         </div>
         <div>
@@ -29,7 +29,7 @@
         <!-- Float menu right -->
         <!-- <div *ngIf="favorites?.length > 0 && rootId == parentId" [class]="typeMenu" (click)="loadFavorite()">
             <a [ngClass]="{'paint-a': typeMenu != 'box-large'}">
-                <i class="fa fa-star" style="color: orange;"></i>
+                <i class="fas fa-star" style="color: orange;"></i>
                 <div style="font-weight: 600;">{{ labelFavorite || 'Favorite' }}</div>
             </a>
             <ul>

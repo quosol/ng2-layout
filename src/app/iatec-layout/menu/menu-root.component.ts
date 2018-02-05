@@ -50,7 +50,7 @@ export class MenuRootComponent implements ControlValueAccessor {
     public favoriteItem: InternalMenuItemModel = <InternalMenuItemModel>{
         menuItemModel: <MenuItemModel>{
             title: this.labelFavorite || 'Favorite',
-            iconClass: 'fa fa-star color-orange'
+            iconClass: 'fas fa-star color-orange'
         }
     }
 
