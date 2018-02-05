@@ -11,7 +11,7 @@ import { ItemEventInterface } from '../interface/item-event.interface';
             <a [attr.title]="item?.menuItemModel?.title">
                 <i *ngIf="!template" [ngClass]="item?.menuItemModel?.iconClass"></i> <span *ngIf="!template">{{item?.menuItemModel?.title}}</span>
                 <ng-template *ngIf="template" ngFor [ngForOf]="[item?.menuItemModel]" [ngForTemplate]="template"></ng-template>
-                <i *ngIf="item?.menuItemModel?.target" class='fa fa-star favorite' [class.active]='item?.menuItemModel?.isFavority' title='Favorite' (click)="onFavorite(item, $event)"></i>
+                <i *ngIf="item?.menuItemModel?.target" class='fas fa-star favorite' [class.active]='item?.menuItemModel?.isFavority' title='Favorite' (click)="onFavorite(item, $event)"></i>
             </a>
             <ng-content></ng-content>
         </li>
