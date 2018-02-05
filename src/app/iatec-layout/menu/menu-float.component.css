@@ -53,10 +53,12 @@ nav.menu-float .menu .box-large>div {
 }
 
 nav.menu-float .menu .box-large .glyphicon,
+nav.menu-float .menu .box-large .md-icon,
+nav.menu-float .menu .box-large .fa,
 nav.menu-float .menu .box-large .fas,
 nav.menu-float .menu .box-large .far {
     font-size: 70px;
-    font-weight: 100;
+    /* font-weight: 100; */
     color: #0071BB;
     cursor: pointer;
     margin: 10px;

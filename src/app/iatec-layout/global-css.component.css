@@ -193,7 +193,7 @@ section.menu .search {
 section.menu .search::before {
     position: absolute;
     display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
+    font: normal normal normal 14px/1 Font Awesome\ 5 Free;
     content: '\f002';
     color: #767676;
     font-size: 16px;

@@ -8,13 +8,13 @@
         <div>
             <div class="btn-group">
                 <a (click)='changeTypeMenu("box-large")' [class.active]="typeMenu == 'box-large'">
-                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="fas fa-th"></span>
                 </a>
                 <a (click)='changeTypeMenu("box-list-block")' [class.active]="typeMenu == 'box-list-block'">
-                    <span class="glyphicon glyphicon-th-list"></span>
+                    <span class="fas fa-th-list"></span>
                 </a>
                 <a (click)='changeTypeMenu("box-list")' [class.active]="typeMenu == 'box-list'">
-                    <span class="glyphicon glyphicon-align-justify"></span>
+                    <span class="fas fa-align-justify"></span>
                 </a>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <i [class]="itemAux.iconClass">&nbsp;</i>
                     <a *ngIf="itemAux.id" (click)="setRootId(itemAux, $event)">
                         <span *ngIf="!layoutList">{{itemAux.title}}</span>
-                        <ng-template *ngIf="layoutList" ngFor [ngForOf]="[itemAux]" [ngForTemplate]="layoutList"></ng-template>                        
+                        <ng-template *ngIf="layoutList" ngFor [ngForOf]="[itemAux]" [ngForTemplate]="layoutList"></ng-template>
                     </a>
                     <span *ngIf="!itemAux.id">{{itemAux.title}}</span>
                 </li>
