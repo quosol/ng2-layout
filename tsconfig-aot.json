@@ -22,6 +22,8 @@
   ],
   "angularCompilerOptions": {
     "genDir": "iatec-layout",
-    "skipMetadataEmit": false
+    "skipTemplateCodegen": true,
+    "fullTemplateTypeCheck": true,
+    "preserveWhiteSpace": false
   }
 }
