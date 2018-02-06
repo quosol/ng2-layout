@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     @Input() labelEntity: string;
     @Input() labelLanguage: string;
     @Input() notifications: Array<NotificationModel>;
+    @Input() pendingNotifications: number = 0;
     @Input() entities: Array<EntityModel>;
     @Input() currentEntity: EntityModel;
     @Input() languages: Array<LanguageModel>;
@@ -86,4 +87,6 @@ export class HeaderComponent implements OnInit {
             event.stopPropagation()
         });
     }
+
+
 }
