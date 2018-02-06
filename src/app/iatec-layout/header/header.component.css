@@ -100,7 +100,7 @@ header aside.profile>div>a:hover {
     text-decoration: none;
 }
 
-.btn-no-radius, .btn-no-radius .btn {
+.btn-no-radius,
+.btn-no-radius .btn {
     border-radius: unset;
 }
-    

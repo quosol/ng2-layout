@@ -30,7 +30,7 @@ $ npm install --save @iatec/ng2-layout
     (allNotifications)="onAllNotification($event)"
     (clickNotification)="onClickNotification($event)"
     (account)="onClickAccount($event)"
-    (singout)="onClickSingout($event)"
+    (signOut)="onClickSignOut($event)"
     [languages]="languages"
     [currentLanguage]="selectedLanguage"
     (clickLanguage)="onClickLanguage($event)"

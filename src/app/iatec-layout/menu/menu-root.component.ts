@@ -19,10 +19,8 @@ import { ItemEventInterface } from '../interface/item-event.interface';
 })
 
 export class MenuRootComponent implements ControlValueAccessor {
-
     private propagateChange: any = () => { };
     private reorganizeMenu: boolean = true;
-
 
     @Input() version: string = "";
     @Input() labelVersion: string;
@@ -121,7 +119,7 @@ export class MenuRootComponent implements ControlValueAccessor {
             u: 'ùúûü',
             y: 'ÿ'
         },
-        chars = /[aceinosuy]/g;
+            chars = /[aceinosuy]/g;
         return value.replace(chars, function (c) {
             return '[' + c + accents[c] + ']';
         });

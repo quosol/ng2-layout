@@ -11,12 +11,14 @@ import { ItemEventInterface } from '../interface/item-event.interface';
     selector: 'iatec-tree-menu',
     templateUrl: './tree-menu.component.html',
     providers: [
-        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TreeMenuComponent), multi: true },
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TreeMenuComponent),
+            multi: true
+        }
     ]
 })
-
 export class TreeMenuComponent implements ControlValueAccessor {
-
     private propagateChange: any = () => { };
 
     @ViewChildren(MenuItemComponent) private menuItemComponents: QueryList<MenuItemComponent>;
@@ -53,7 +55,7 @@ export class TreeMenuComponent implements ControlValueAccessor {
     public dispatchEvent(itemEvent: ItemEventInterface): void {
         let item = itemEvent.item;
         if (item.target == null) {
-            if(!(itemEvent.mouseEvent.clientX > 300))
+            if (!(itemEvent.mouseEvent.clientX > 300))
                 this.showFloatMenu.next(itemEvent);
         } else {
             this.clickMenu.next(itemEvent);
@@ -79,6 +81,6 @@ export class TreeMenuComponent implements ControlValueAccessor {
     }
 
     setDisabledState?(isDisabled: boolean): void {
-        //throw new Error("Method not implemented.");
+        //throw new Error('Method not implemented.');
     }
 }
