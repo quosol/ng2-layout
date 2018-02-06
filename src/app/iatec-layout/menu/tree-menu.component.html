@@ -1,5 +1,7 @@
-<iatec-menu-item *ngFor="let item of (value | filterMenu:'parentId':parentId)" [item]="item" [template]="templateMenuItem" (clickFavorite)="onClickFavorite($event)" (clickMenu)="onClick($event)">
+<iatec-menu-item *ngFor="let item of (value | filterMenu:'parentId':parentId)" [item]="item" [template]="templateMenuItem"
+    (clickFavorite)="onClickFavorite($event)" (clickMenu)="onClick($event)">
     <ul *ngIf="(value | filterMenu:'parentId':item.menuItemModel.id).length > 0">
-        <iatec-tree-menu [ngModel]="value" [parentId]="item.menuItemModel.id" [templateMenuItem]="templateMenuItem" (clickFavorite)="onClickFavorite($event)" (clickMenu)="dispatchEvent($event)" (showFloatMenu)="dispatchEvent($event)"></iatec-tree-menu>
+        <iatec-tree-menu [ngModel]="value" [parentId]="item.menuItemModel.id" [templateMenuItem]="templateMenuItem" (clickFavorite)="onClickFavorite($event)"
+            (clickMenu)="dispatchEvent($event)" (showFloatMenu)="dispatchEvent($event)"></iatec-tree-menu>
     </ul>
 </iatec-menu-item>

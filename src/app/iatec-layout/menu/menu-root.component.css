@@ -5,121 +5,121 @@ ul.menu-root ul {
     position: relative;
 }
 
-    ul.menu-root li {
-        list-style-type: none;
-        height: auto;
-        overflow-y: hidden;
-        transition: .658s all;
-    }
+ul.menu-root li {
+    list-style-type: none;
+    height: auto;
+    overflow-y: hidden;
+    transition: .658s all;
+}
 
-        ul.menu-root li a {
-            display: block;
-            padding: 10px;
-            padding-right: 30px;
-            position: relative;
-            font-size: 14px;
-            cursor: pointer;
-            color: black;
-            text-decoration: none;
-        }
+ul.menu-root li a {
+    display: block;
+    padding: 10px;
+    padding-right: 30px;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
 
-            ul.menu-root li a *:first-child {
-                padding: 0px 15px 0px 5px;
-            }
+ul.menu-root li a *:first-child {
+    padding: 0px 15px 0px 5px;
+}
 
-        ul.menu-root li > a > i.favorite {
-            position: absolute;
-            top: 6px;
-            right: 12px;
-            padding: 5px;
-            font-size: 17px;
-            color: silver;
-            display: none;
-        }
+ul.menu-root li>a>i.favorite {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    padding: 5px;
+    font-size: 17px;
+    color: silver;
+    display: none;
+}
 
-        ul.menu-root li > a:hover i.favorite {
-            display: inline-block;
-        }
+ul.menu-root li>a:hover i.favorite {
+    display: inline-block;
+}
 
-        ul.menu-root li > a > i.favorite.active,
-        ul.menu-root li > a > i.favorite:hover {
-            cursor: pointer;
-            color: orange;
-            display: inline-block;
-        }
+ul.menu-root li>a>i.favorite.active,
+ul.menu-root li>a>i.favorite:hover {
+    cursor: pointer;
+    color: orange;
+    display: inline-block;
+}
 
-        ul.menu-root li:hover > a {
-            background-color: rgba(249,249,249, 1);
-            text-decoration: none;
-        }
+ul.menu-root li:hover>a {
+    background-color: rgba(249, 249, 249, 1);
+    text-decoration: none;
+}
 
-        ul.menu-root li.semi-active > a {
-            background-color: #E6F2FA;
-        }
+ul.menu-root li.semi-active>a {
+    background-color: #E6F2FA;
+}
 
-        ul.menu-root li.active > a {
-            font-weight: bold;
-            background-color: #E6F2FA;
-            /* background-color: #E1E1E1; */
-            /* background: rgba(99,173,221, 0.5); */
-        }
+ul.menu-root li.active>a {
+    font-weight: bold;
+    background-color: #E6F2FA;
+    /* background-color: #E1E1E1; */
+    /* background: rgba(99,173,221, 0.5); */
+}
 
-        ul.menu-root li a + ul li {
-            padding-left: 15px;
-        }
+ul.menu-root li a+ul li {
+    padding-left: 15px;
+}
 
-        ul.menu-root li a + ul:not(:empty)::after {
-            pointer-events: none;
-            display: block;
-            content: " ";
-            position: absolute;
-            top: -35px;
-            right: 45px;
-            width: 2px;
-            height: 24px;
-            border-left: 1px solid silver;
-            box-sizing: border-box;
-        }
+ul.menu-root li a+ul:not(:empty)::after {
+    pointer-events: none;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: -35px;
+    right: 45px;
+    width: 2px;
+    height: 24px;
+    border-left: 1px solid silver;
+    box-sizing: border-box;
+}
 
-        ul.menu-root li a + ul:not(:empty)::before {
-            pointer-events: none;
-            display: inline-block;
-            content: "\f107";
-            font: normal normal normal 14px/1 Font Awesome\ 5 Free;
-            position: absolute;
-            top: -31px;
-            right: 18px;
-            font-size: 18px;
-            transition: .658s transform cubic-bezier(0.19, 1, 0.22, 1);
-            will-change: transform;
-        }
+ul.menu-root li a+ul:not(:empty)::before {
+    position: absolute;
+    display: inline-block;
+    font: normal normal normal 14px/1 Font Awesome\ 5 Free;
+    content: '\f107';
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    top: -31px;
+    right: 18px;
+    transition: .658s transform cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+}
 
-        ul.menu-root li.active > a + ul::before {
-            transform: rotate(180deg);
-            font-weight: bold;
-        }
+ul.menu-root li.active>a+ul::before {
+    transform: rotate(180deg);
+    font-weight: bold;
+}
 
-        ul.menu-root li > ul {
-            max-height: 0vh;
-            /* transition: max-height .45s cubic-bezier(0.23, 1, 0.32, 1); */
-        }
+ul.menu-root li>ul {
+    max-height: 0vh;
+    /* transition: max-height .45s cubic-bezier(0.23, 1, 0.32, 1); */
+}
 
-        ul.menu-root li.active > ul {
-            max-height: 350vh;
-            /* transition: max-height .65s ease-in; */
-        }
+ul.menu-root li.active>ul {
+    max-height: 350vh;
+    /* transition: max-height .65s ease-in; */
+}
 
 @keyframes highlight {
     0% {
         background: orange;
     }
-
     100% {
         background: none;
     }
 }
 
-#mniRootFavorites.focus > a {
+#mniRootFavorites.focus>a {
     animation: highlight 1s;
 }
 

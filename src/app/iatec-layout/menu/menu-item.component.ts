@@ -7,9 +7,9 @@ import { ItemEventInterface } from '../interface/item-event.interface';
 @Component({
     selector: 'iatec-menu-item',
     template: `
-        <li [attr.id]="item?.menuItemModel?.id" (click)="onClick(item, $event)" [ngClass]="{active: item.active, 'semi-active': item.semiActive}" >
+        <li [attr.id]="item?.menuItemModel?.id" (click)="onClick(item, $event)" [ngClass]="{ active: item.active, 'semi-active': item.semiActive }">
             <a [attr.title]="item?.menuItemModel?.title">
-                <i *ngIf="!template" [ngClass]="item?.menuItemModel?.iconClass"></i> <span *ngIf="!template">{{item?.menuItemModel?.title}}</span>
+                <i *ngIf="!template" [ngClass]="item?.menuItemModel?.iconClass"></i> <span *ngIf="!template">{{ item?.menuItemModel?.title }}</span>
                 <ng-template *ngIf="template" ngFor [ngForOf]="[item?.menuItemModel]" [ngForTemplate]="template"></ng-template>
                 <i *ngIf="item?.menuItemModel?.target" class='fas fa-star favorite' [class.active]='item?.menuItemModel?.isFavority' title='Favorite' (click)="onFavorite(item, $event)"></i>
             </a>
@@ -18,7 +18,6 @@ import { ItemEventInterface } from '../interface/item-event.interface';
     `,
     styles: [``]
 })
-
 export class MenuItemComponent {
     @Input() item: InternalMenuItemModel;
     @Input() template: TemplateRef<any>;
@@ -41,9 +40,10 @@ export class MenuItemComponent {
 
         if (ev.clientX > 300 && item.menuItemModel.target == null) {
             this.setActive(!this.item.active);
-        } else
+        }
+        else {
             this.item.semiActive = true;
-
+        }
         this.clickMenu.next(<ItemEventInterface>{ mouseEvent: ev, item: item.menuItemModel });
     }
 

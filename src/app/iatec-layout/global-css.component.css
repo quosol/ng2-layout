@@ -175,7 +175,6 @@ section.menu {
     transform: translateX(-100%);
 }
 
-
 /* Animate Menu */
 
 section.menu,
@@ -253,8 +252,8 @@ section.menu nav div.menu::-webkit-scrollbar {
     width: 6px;
 }
 
-
 /* TODO: Remove if not fixed in root menu */
+
 /* section.menu nav.menu-float>a{
     position: absolute;
     right: 30px;

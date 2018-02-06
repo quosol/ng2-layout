@@ -5,13 +5,12 @@
         </button>
         <img class="logo" alt="IATec" [attr.src]="logoURL" (click)="goHome($event)" />
     </aside>
-
     <nav>
         <!-- Content of middle header -->
         <h5 style="text-align: center; margin: 0px; font-size: 1.8rem;">
             <div class="dropdown" id="headerbar" style="display: inline-block; min-width: 50%; background: none;">
                 <!-- TODO: Add current entity -->
-                <a data-toggle="dropdown" style="font-weight: 600;">{{currentEntity?.codeEntity}} - {{currentEntity?.name}}
+                <a data-toggle="dropdown" style="font-weight: 600;">{{ currentEntity?.codeEntity }} - {{ currentEntity?.name }}
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu" style=" box-shadow: unset; color: #666666; max-height: 723px; border-radius: 0px; min-width: 400px; padding: 10px;">
@@ -22,13 +21,13 @@
                         <div *ngFor="let entity of entities?.slice(0, 5)" class="row">
                             <a (click)="onSelectEntity(entity)">
                                 <div class="col-md-12">
-                                    <span class="hidden-sm">{{entity.codeEntity}} - </span>{{entity.name}}
+                                    <span class="hidden-sm">{{ entity.codeEntity}} - </span>{{ entity.name }}
                                 </div>
                             </a>
                         </div>
                         <br />
                         <p>
-                            <a class="btn btn-default btn-no-radius" (click)="onAllEntities($event)">{{labelShowAll || 'Show All'}}</a>
+                            <a class="btn btn-default btn-no-radius" (click)="onAllEntities($event)">{{ labelShowAll || 'Show All' }}</a>
                         </p>
                     </div>
                     <ng-template *ngIf="templateEntities" [ngTemplateOutlet]="templateEntities"></ng-template>
@@ -36,39 +35,37 @@
             </div>
         </h5>
     </nav>
-
     <aside class="profile">
         <div *ngIf="notifications?.length > 0" class="budget dropdown">
             <a data-toggle="dropdown" role="button" style="color: white;">
                 <i class="far fa-bell" style="font-size: 25px;" aria-hidden="true"></i>
-                <span class="label">{{notifications?.length}}</span>
+                <span class="label">{{ notifications?.length }}</span>
             </a>
             <!-- TODO: Add information of notification -->
             <div class="dropdown-menu dropdown-with-arrow pull-right" role="menu" aria-labelledby="info-dropdown" style="border-radius: 0px;">
-                <p>{{labelNotifications || 'Notifications'}}</p>
+                <p>{{ labelNotifications || 'Notifications' }}</p>
                 <ul class="list-unstyled">
                     <li *ngFor="let notification of notifications" (click)="onClickNotification(notification)" style="cursor: pointer;" class="header-notification notification-toread">
                         <p *ngIf="!templateNotification">
-                            <img style="float: left;" *ngIf="notification?.imgURL" [attr.src]="notification.imgURL" width="40" height="40">
-                            <span>{{notification.title}}</span>
+                            <img style="float: left;" *ngIf="notification?.imgURL" [attr.src]="notification.imgURL" width="35" height="35">
+                            <span>{{ notification.title }}</span>
                             <br/>
-                            <i style="color: gray"> {{notification.description}} </i>
+                            <i style="color: gray"> {{ notification.description }} </i>
                         </p>
                         <ng-template *ngIf="templateNotification" ngFor [ngForOf]="[notification]" [ngForTemplate]="templateNotification"></ng-template>
                     </li>
                 </ul>
                 <br />
                 <button class="btn btn-primary" (click)="onAllNotifications($event)">
-                    {{labelShowAll || 'Show All'}}
+                    {{ labelShowAll || 'Show All' }}
                 </button>
             </div>
         </div>
-
         <div class="dropdown pull-right">
             <a role="button" data-toggle="dropdown" href="#">
                 <span class="hide-xs">{{profile?.username}}</span>
-                <img [attr.src]="profile?.imgURL" height="30" width="30" class="img-circle" />
-                <i class="fas fa-angle-down fa-2x" aria-hidden="true"></i>
+                <img [attr.src]="profile?.imgURL" height="45" width="45" class="img-circle" />
+                <i class="fas fa-angle-down fa-2" aria-hidden="true"></i>
             </a>
             <!-- TODO: Add information of current user -->
             <div style="color: #666666; border-radius: unset; box-shadow: unset;" class="dropdown-menu dropdown-with-arrow pull-right"
@@ -78,19 +75,20 @@
                         <img [attr.src]="profile?.imgURL" class="img-circle" height="110" width="110">
                     </div>
                     <div class="col-md-8">
-                        <h3 style="color: #95989A; margin-bottom: 0px;">{{profile?.username}}</h3>
-                        <p style="color: #95989A;">{{profile?.firstName}} {{profile?.lastName}}</p>
-                        <p style="color: #5291F5; margin: 15px 0;">{{profile?.email}}</p>
+                        <h3 style="color: #95989A; margin-bottom: 0px;">{{ profile?.username }}</h3>
+                        <p style="color: #95989A;">{{ profile?.firstName }} {{ profile?.lastName }}</p>
+                        <p style="color: #5291F5; margin: 15px 0;">{{ profile?.email }}</p>
                         <div style="color: #95989A;" [style.display]="currentLanguage ? '' : 'none'">
                             {{ labelLanguage || 'Language' }}
                             <div class="dropdown">
-                                <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img *ngIf="currentLanguage" [src]="currentLanguage.imageURL" class="img-circle" height="30" width="30" /> {{currentLanguage?.name}}
+                                <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <img *ngIf="currentLanguage" [src]="currentLanguage.imageURL" class="img-circle" height="30" width="30" /> {{ currentLanguage?.name }}
                                     <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: unset;">
                                     <div *ngFor="let language of languages" (click)="onClickLanguage(language)" style="cursor: pointer;">
-                                        <img [src]="language.imageURL" class="img-circle" height="30" width="30" /> {{language.name}}
+                                        <img [src]="language.imageURL" class="img-circle" height="30" width="30" /> {{ language.name }}
                                     </div>
                                 </div>
                             </div>
@@ -100,11 +98,11 @@
                 <div class="btn-no-radius" style="margin-top: 30px;">
                     <div class="pull-right">
                         <a class="btn btn-primary" (click)="onAccount($event)">
-                            {{labelAccount || 'Account'}}
+                            {{ labelAccount || 'Account' }}
                         </a>
                         &nbsp;
-                        <a class="btn btn-default" (click)="onSingout($event)">
-                            {{labelSingout || 'Sign Out'}}
+                        <a class="btn btn-default" (click)="onSignOut($event)">
+                            {{ labelSignOut || 'Sign Out' }}
                         </a>
                     </div>
                 </div>

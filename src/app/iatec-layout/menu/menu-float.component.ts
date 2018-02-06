@@ -9,17 +9,18 @@ import { InternalMenuItemModel } from '../models/internal-menu-item.model';
     templateUrl: './menu-float.component.html',
     styleUrls: ['./menu-float.component.css'],
     providers: [
-        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuFloatComponent), multi: true },
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MenuFloatComponent),
+            multi: true
+        }
     ]
 })
-
 export class MenuFloatComponent implements ControlValueAccessor {
-
     private propagateChange: any = () => { };
-    
     public value: Array<InternalMenuItemModel>;
     public rootId: number | string;
-    public typeMenu: string = "box-large";
+    public typeMenu: string = 'box-large';
     public items: Array<FloatMenuItemModel> = [];
     public breadcrumbItems: Array<MenuItemModel> = [];
 
@@ -47,7 +48,7 @@ export class MenuFloatComponent implements ControlValueAccessor {
         let filter = this.value.filter(x => x.menuItemModel.parentId == this.rootId);
         this.items = filter.map(x => {
             let mflm = new FloatMenuItemModel(x.menuItemModel);
-            let childrens = this.value.filter(y => y.menuItemModel.parentId == x.menuItemModel.id).map( n => n.menuItemModel );
+            let childrens = this.value.filter(y => y.menuItemModel.parentId == x.menuItemModel.id).map(n => n.menuItemModel);
             if (childrens.length > 3) {
                 childrens = childrens.slice(0, 3);
                 childrens.push(<MenuItemModel>{ title: '...' });
@@ -60,7 +61,7 @@ export class MenuFloatComponent implements ControlValueAccessor {
     }
 
     private getMenuTreeParents(id: number | string): Array<MenuItemModel> {
-        let items = this.value.filter(x => x.menuItemModel.id == id).map( m => m.menuItemModel );
+        let items = this.value.filter(x => x.menuItemModel.id == id).map(m => m.menuItemModel);
         if (items.length > 0 && items[0].parentId != null)
             items = items.concat(this.getMenuTreeParents(items[0].parentId));
 
@@ -109,6 +110,6 @@ export class MenuFloatComponent implements ControlValueAccessor {
     }
 
     setDisabledState?(isDisabled: boolean): void {
-        // throw new Error("Method not implemented.");
+        // throw new Error('Method not implemented.');
     }
 }

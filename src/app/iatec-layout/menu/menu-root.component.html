@@ -5,7 +5,7 @@
     </div>
     <nav>
         <ul class="menu-root">
-            <div *ngIf="loading" style="padding: 10px;">{{ labelLoading || 'Loading ...'}}</div>
+            <div *ngIf="loading" style="padding: 10px;">{{ labelLoading || 'Loading...'}}</div>
             <!-- Favorite Menu -->
             <iatec-menu-item *ngIf="!keySearch && menuItemFavorite?.length > 0" [item]="favoriteItem" #favority>
                 <ul>
@@ -13,13 +13,14 @@
                 </ul>
             </iatec-menu-item>
             <!-- Tree menu -->
-            <iatec-tree-menu *ngIf="!keySearch" [ngModel]="value" [parentId]="parentId" [templateMenuItem]="templateMenuItem" (clickMenu)="onClickMenu($event)" (clickFavorite)="onClickFavorite($event)"
-                (showFloatMenu)="onShowFloatMenu($event)"></iatec-tree-menu>
+            <iatec-tree-menu *ngIf="!keySearch" [ngModel]="value" [parentId]="parentId" [templateMenuItem]="templateMenuItem" (clickMenu)="onClickMenu($event)"
+                (clickFavorite)="onClickFavorite($event)" (showFloatMenu)="onShowFloatMenu($event)"></iatec-tree-menu>
             <!-- Search Menu -->
             <iatec-menu-item *ngFor="let item of menuItemSearch" [item]="item" [template]="templateMenuItem" (clickMenu)="onClickSearch($event)"></iatec-menu-item>
         </ul>
     </nav>
-    <iatec-menu-float [layoutMain]="templateFloatMain" [layoutList]="templateFloatList" [(id)]="idRootFloatMenu" [labelFavorite]="favoriteItem.menuItemModel.title" [favorites]="menuItemFavorite" [ngModel]="value" [iconClassLarge]="iconClassLarge" [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
+    <iatec-menu-float [layoutMain]="templateFloatMain" [layoutList]="templateFloatList" [(id)]="idRootFloatMenu" [labelFavorite]="favoriteItem.menuItemModel.title"
+        [favorites]="menuItemFavorite" [ngModel]="value" [iconClassLarge]="iconClassLarge" [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
     <footer>
         {{ labelVersion || 'Version' }}: {{ version || 'unknow' }}
     </footer>
