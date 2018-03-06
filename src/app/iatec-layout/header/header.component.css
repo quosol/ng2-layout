@@ -105,3 +105,40 @@ header aside.profile>div>a:hover {
 .btn-no-radius .btn {
     /* border-radius: unset; */
 }
+
+
+/*MOBILE*/
+
+.hidden-sm.hidden-md.hidden-lg aside {
+    padding: 10px 15px;
+    padding-left: 0;
+}
+
+.img-xs {
+    float: left;
+    width: 65px;
+    height: 100%;
+    background-color: #fff;
+    padding: 15px 15px;
+}
+
+.hidden-sm.hidden-md.hidden-lg .xs-btn {
+    float: left;
+}
+
+.xs-notification .label {
+    position: absolute;
+    right: -33%;
+    bottom: -36%;
+    background-color: #00B00B;
+    font-size: 9pt;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+
+/*FIM MOBILE*/

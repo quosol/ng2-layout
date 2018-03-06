@@ -9,6 +9,7 @@ import { EntityModel, ProfileModel, NotificationModel, LanguageModel } from '../
 })
 export class HeaderComponent implements OnInit {
     @Input() logoURL: string;
+    @Input() logoURLMobile: string;
     @Input() profile: ProfileModel;
     @Input() labelAccount: string;
     @Input() labelSignOut: string;

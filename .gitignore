@@ -43,3 +43,9 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+src/app/app\.component\.html
+
+src/app/app\.component\.ts
+
+src/index\.html
