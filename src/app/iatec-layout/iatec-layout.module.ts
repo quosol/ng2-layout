@@ -13,7 +13,7 @@ import { TreeMenuComponent } from './menu/tree-menu.component';
 
 import { FilterMenuPipe, FilterMenuFavoritePipe } from './pipes';
 import { RouterModule } from '@angular/router';
-const { version: appVersion } = require('../../../package.json');
+const { version: appVersion } = require('../package.json');
 
 const myDirectives = [
     HeaderComponent,
