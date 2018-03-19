@@ -1,6 +1,6 @@
 {
     "name": "@iatec/ng2-layout",
-    "version": "0.0.14",
+    "version": "0.0.16",
     "license": "MIT",
     "author": {
         "name": "Flávio Silva",
@@ -37,6 +37,8 @@
         "@types/node": "~6.0.60",
         "codelyzer": "~3.1.1",
         "core-js": "^2.4.1",
+        "grunt": "^1.0.2",
+        "grunt-bump": "^0.8.0",
         "gulp": "^3.9.1",
         "gulp-inline-ng2-template": "^4.0.0",
         "jasmine-core": "~2.6.2",
