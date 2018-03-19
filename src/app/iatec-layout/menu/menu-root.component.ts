@@ -38,7 +38,7 @@ export class MenuRootComponent implements ControlValueAccessor {
     @ViewChild('favority') private favorite: MenuItemComponent;
     @ContentChild('templateMenuItem') public templateMenuItem: TemplateRef<any>;
     @ContentChild('templateFloatMain') public templateFloatMain: TemplateRef<any>;
-    @ContentChild('templateFloatList') public templateFloatList: TemplateRef<any>;
+    @ContentChild('') public templateFloatList: TemplateRef<any>;
 
     public value: Array<InternalMenuItemModel> = [];
     public keySearch: string = "";

@@ -141,5 +141,61 @@ header aside.profile>div>a:hover {
     padding-bottom: 3px;
 }
 
+@media (max-width: 768px) {
+    aside {
+        width: calc(100vw - 65px) !important;
+        min-width: unset !important;
+    }
+    .notification-list div {
+        height: 67px;
+    }
+    .xs-notification-drop {
+        width: 350px;
+        top: 40px !important;
+        right: -45px !important;
+    }
+    .xs-entity {
+        left: -151px !important;
+    }
+}
+
+@media (max-width: 415px) {
+    .xs-profile {
+        left: -362px !important;
+        width: 405px !important;
+        top: 47px !important;
+    }
+}
+
+@media (max-width: 376px) {
+    .xs-notification .fa-bell {
+        font-size: 22px !important;
+    }
+    .xs-profile {
+        left: -266px !important;
+        width: 300px !important;
+        top: 47px !important;
+    }
+    .xs-entity {
+        left: -108px !important;
+        width: 288px !important;
+        min-width: unset !important;
+    }
+}
+
+@media (max-width: 320px) {
+    h5 {
+        width: 57% !important;
+    }
+    .xs-profile {
+        left: -266px !important;
+        width: 310px !important;
+        top: 47px !important;
+    }
+    .xs-notification-drop {
+        width: 288px !important;
+    }
+}
+
 
 /*FIM MOBILE*/

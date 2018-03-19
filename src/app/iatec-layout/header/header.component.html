@@ -15,7 +15,7 @@
                     <a data-toggle="dropdown">
                         {{ currentEntity?.codeEntity }}
                     </a>
-                    <div class="dropdown-menu" style="
+                    <div class="dropdown-menu xs-entity" style="
                     color: #666666;
                     border-radius: unset;
                     box-shadow: unset;
@@ -53,13 +53,13 @@
                     <span *ngIf="pendingNotifications > 0" class="label">{{ pendingNotifications }}</span>
                 </a>
                 <!-- TODO: Add information of notification -->
-                <div class="dropdown-menu dropdown-with-arrow pull-right" role="menu" aria-labelledby="info-dropdown" style="
+                <div class="dropdown-menu dropdown-with-arrow pull-right xs-notification-drop" role="menu" aria-labelledby="info-dropdown" style="
                 color: #666666;
                 border-radius: unset;
                 box-shadow: unset;
                 width: 350px;
                 top: 46px;
-                right: -28px !important;">
+                right: -28px;">
                     <p>{{ labelNotifications || 'Notifications' }}</p>
                     <ul class="list-unstyled">
                         <li *ngFor="let notification of notifications" (click)="onClickNotification(notification)" style="cursor: pointer;" class="header-notification notification-toread">
@@ -89,7 +89,7 @@
                 border-radius: unset;
                 box-shadow: unset;
                 left: -374px;
-                top: 49px;" class="dropdown-menu dropdown-with-arrow pull-right" role="menu" aria-labelledby="info-dropdown">
+                top: 49px;" class="dropdown-menu dropdown-with-arrow pull-right xs-profile" role="menu" aria-labelledby="info-dropdown">
                     <div class="row">
                         <div class="col-md-4" style="text-align: center;">
                             <img [attr.src]="profile?.imgURL" class="img-circle" height="110" width="110">
