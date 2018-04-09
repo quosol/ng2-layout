@@ -81,12 +81,13 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit(): void {
         // workaround to implements dropbutton inner dropdown
-        let id = 'dropdownMenuButton'
-        let lang = document.querySelector('#' + id);
-        lang.addEventListener('click', function (event) {
-            document.querySelector('[aria-labelledby=' + id + ']').classList.toggle('show');
-            event.stopPropagation()
-        });
+        let lang = document.querySelectorAll(".ddMbutton");
+        for (var i = 0; i < lang.length; i++) {
+            lang[i].addEventListener('click', function (event) {
+                document.querySelector('[aria-labelledby=' + ']').classList.toggle('show');
+                event.stopPropagation()
+            });
+        }
     }
 
 

@@ -101,7 +101,7 @@
                             <div style="color: #95989A;" [style.display]="currentLanguage ? '' : 'none'">
                                 {{ labelLanguage || 'Language' }}
                                 <div class="dropdown">
-                                    <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" class="ddMbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img *ngIf="currentLanguage" [src]="currentLanguage.imageURL" class="img-circle" height="30" width="30" /> {{ currentLanguage?.name }}
                                         <span class="caret"></span>
                                     </button>
@@ -218,7 +218,7 @@
                         <div style="color: #95989A;" [style.display]="currentLanguage ? '' : 'none'">
                             {{ labelLanguage || 'Language' }}
                             <div class="dropdown">
-                                <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" class="ddMbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img *ngIf="currentLanguage" [src]="currentLanguage.imageURL" class="img-circle" height="30" width="30" /> {{ currentLanguage?.name }}
                                     <span class="caret"></span>
                                 </button>
