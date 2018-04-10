@@ -101,11 +101,11 @@
                             <div style="color: #95989A;" [style.display]="currentLanguage ? '' : 'none'">
                                 {{ labelLanguage || 'Language' }}
                                 <div class="dropdown">
-                                    <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButton" class="ddMbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button style="border: none; background: none;" class="dropdown-toggle" type="button" id="dropdownMenuButtonM" class="ddMbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img *ngIf="currentLanguage" [src]="currentLanguage.imageURL" class="img-circle" height="30" width="30" /> {{ currentLanguage?.name }}
                                         <span class="caret"></span>
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: unset;">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonM" style="width: unset;">
                                         <div *ngFor="let language of languages" (click)="onClickLanguage(language)" style="cursor: pointer;">
                                             <img [src]="language.imageURL" class="img-circle" height="30" width="30" /> {{ language.name }}
                                         </div>

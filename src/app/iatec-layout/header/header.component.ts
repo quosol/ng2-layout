@@ -76,18 +76,33 @@ export class HeaderComponent implements OnInit {
 
     public onClickLanguage(item: LanguageModel): void {
         this.clickLanguage.next(item);
+        document.querySelector('[aria-labelledby=dropdownMenuButtonM]').classList.toggle('show');
         document.querySelector('[aria-labelledby=dropdownMenuButton]').classList.toggle('show');
     }
 
     ngOnInit(): void {
+
+        let id = 'dropdownMenuButton' 
+        let lang = document.querySelector('#' + id); 
+        lang.addEventListener('click', function (event) { 
+            document.querySelector('[aria-labelledby=' + id + ']').classList.toggle('show'); 
+            event.stopPropagation() 
+        }); 
+
+        let idM = 'dropdownMenuButtonM' 
+        let langM = document.querySelector('#' + idM); 
+        langM.addEventListener('click', function (event) { 
+            document.querySelector('[aria-labelledby=' + idM + ']').classList.toggle('show'); 
+            event.stopPropagation() 
+        }); 
         // workaround to implements dropbutton inner dropdown
-        let lang = document.querySelectorAll(".ddMbutton");
-        for (var i = 0; i < lang.length; i++) {
-            lang[i].addEventListener('click', function (event) {
-                document.querySelector('[aria-labelledby=' + ']').classList.toggle('show');
-                event.stopPropagation()
-            });
-        }
+        // let lang = document.querySelectorAll(".ddMbutton");
+        // for (var i = 0; i < lang.length; i++) {
+        //     lang[i].addEventListener('click', function (event) {
+        //         document.querySelector('[aria-labelledby=' + lang[i] +  ']').classList.toggle('show');
+        //         event.stopPropagation()
+        //     });
+        // }
     }
 
 
