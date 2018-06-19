@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
     @Output() account: EventEmitter<Event> = new EventEmitter<Event>();
     @Output() signOut: EventEmitter<Event> = new EventEmitter<Event>();
     @Output() clickNotification: EventEmitter<NotificationModel> = new EventEmitter<NotificationModel>();
+    @Output() clickIconNotification: EventEmitter<Event> = new EventEmitter<Event>();
     @Output() allNotifications: EventEmitter<Event> = new EventEmitter<Event>();
     @Output() allEntities: EventEmitter<Event> = new EventEmitter<Event>();
     @Output() clickLanguage: EventEmitter<LanguageModel> = new EventEmitter<LanguageModel>();
@@ -51,6 +52,12 @@ export class HeaderComponent implements OnInit {
 
     public onAccount(event: Event): void {
         this.account.emit(event);
+    }
+
+    public onClickIconNotification(event: Event): void {
+        if(this.notifications.length == 0 && this.pendingNotifications > 0){
+            this.clickIconNotification.next(event);
+        }
     }
 
     public onClickNotification(notificationModel: NotificationModel): void {
