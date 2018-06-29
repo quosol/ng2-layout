@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public onClickIconNotification(event: Event): void {
-        if(this.notifications.length == 0 && this.pendingNotifications > 0){
+        if((this.notifications == null || this.notifications.length == 0) && this.pendingNotifications > 0){
             this.clickIconNotification.next(event);
         }
     }
