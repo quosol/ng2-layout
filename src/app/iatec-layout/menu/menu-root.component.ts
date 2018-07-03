@@ -137,9 +137,10 @@ export class MenuRootComponent implements ControlValueAccessor {
         }
 
         try {
-            let exp = new RegExp(this.mRegex(this.keySearch), "ig");
-            this.menuItemSearch = this.value.filter(x => x.menuItemModel.target != null && exp.test(x.menuItemModel.title));
-        } catch (ex) { }
+            const exp = new RegExp(this.mRegex(this.keySearch.toLowerCase()));
+            this.menuItemSearch = this.value.filter(x => x.menuItemModel.target != null && exp.test(x.menuItemModel.title.toLowerCase()));
+        } catch (ex) {
+        }
     }
 
     public onClickMenu(itemEvent: ItemEventInterface): void {
