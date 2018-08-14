@@ -12,21 +12,21 @@
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {NavigationEnd, Router} from '@angular/router';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
-import { MenuItemModel } from '../models';
-import { InternalMenuItemModel } from '../models/internal-menu-item.model';
-import { TreeMenuComponent } from './tree-menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { ItemEventInterface } from '../interface/item-event.interface';
+import {MenuItemModel} from '../models';
+import {InternalMenuItemModel} from '../models/internal-menu-item.model';
+import {TreeMenuComponent} from './tree-menu.component';
+import {MenuItemComponent} from './menu-item.component';
+import {ItemEventInterface} from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-layout-menu',
     templateUrl: './menu-root.component.html',
     styleUrls: ['./menu-root.component.css'],
     providers: [
-        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true },
+        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true},
     ],
     encapsulation: ViewEncapsulation.None
 })
@@ -124,7 +124,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                     });
                     break;
                 case 'Enter':
-                    this.onClickMenu(<ItemEventInterface>{
+                    this.onClickSearch(<ItemEventInterface>{
                         mouseEvent: new MouseEvent('click'),
                         item: this.menuItemSearch[this.menuIndexSelected].menuItemModel
                     });
@@ -260,7 +260,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     public onClickMenuFloat(item: MenuItemModel): void {
         this.resetMenusActive();
         this.setMenuParentsActive(this.value, item.id);
-        this.onClickMenu(<ItemEventInterface>{ item: item });
+        this.onClickMenu(<ItemEventInterface>{item: item});
     }
 
     public onClickSearch(itemEvent: ItemEventInterface): void {
