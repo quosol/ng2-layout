@@ -124,10 +124,12 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                     });
                     break;
                 case 'Enter':
-                    this.onClickSearch(<ItemEventInterface>{
-                        mouseEvent: new MouseEvent('click'),
-                        item: this.menuItemSearch[this.menuIndexSelected].menuItemModel
-                    });
+                    if (this.keySearch && this.keySearch.trim() !== '' && this.menuIndexSelected !== -1) {
+                        this.onClickSearch(<ItemEventInterface>{
+                            mouseEvent: new MouseEvent('click'),
+                            item: this.menuItemSearch[this.menuIndexSelected].menuItemModel
+                        });
+                    }
                     break;
             }
         };
@@ -139,7 +141,8 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                     } catch (e) {
                     }
                 }
-                this.keySearch = '';
+                // this.keySearch = '';
+                this.inputSearch.nativeElement.select();
                 this.inputSearch.nativeElement.focus();
             }
         };
