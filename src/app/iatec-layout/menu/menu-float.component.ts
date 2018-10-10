@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { MenuItemModel, FloatMenuItemModel } from '../models';
 import { InternalMenuItemModel } from '../models/internal-menu-item.model';
+import { ItemEventInterface } from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-menu-float',
@@ -42,7 +43,7 @@ export class MenuFloatComponent implements ControlValueAccessor {
     @Input() layoutList: TemplateRef<any>;
 
     @Output() idChange: EventEmitter<string | number> = new EventEmitter<string | number>();
-    @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() clickMenu: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
 
     private render(): void {
         let filter = this.value.filter(x => x.menuItemModel.parentId == this.rootId);
@@ -78,7 +79,7 @@ export class MenuFloatComponent implements ControlValueAccessor {
         if (item.target == null) {
             this.idChange.emit(item.id);
         } else {
-            this.clickMenu.next(item);
+            this.clickMenu.next(<ItemEventInterface>{item: item, mouseEvent: event});
             this.onClose(event);
         }
     }
