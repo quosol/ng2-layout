@@ -1,28 +1,38 @@
-﻿import { Component, forwardRef, Input, ViewEncapsulation, EventEmitter, Output, ViewChild, ContentChild, TemplateRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+﻿import {
+    Component,
+    ContentChild,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    NgZone,
+    OnDestroy,
+    Output,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
-import { MenuItemModel } from '../models';
-import { InternalMenuItemModel } from '../models/internal-menu-item.model';
-import { TreeMenuComponent } from './tree-menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { ItemEventInterface } from '../interface/item-event.interface';
+import {MenuItemModel} from '../models';
+import {InternalMenuItemModel} from '../models/internal-menu-item.model';
+import {TreeMenuComponent} from './tree-menu.component';
+import {MenuItemComponent} from './menu-item.component';
+import {ItemEventInterface} from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-layout-menu',
     templateUrl: './menu-root.component.html',
     styleUrls: ['./menu-root.component.css'],
     providers: [
-        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true },
+        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true},
     ],
     encapsulation: ViewEncapsulation.None
 })
 
-export class MenuRootComponent implements ControlValueAccessor {
-    private propagateChange: any = () => { };
-    private reorganizeMenu: boolean = true;
-
-    @Input() version: string = "";
+export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
+    @Input() version: string = '';
     @Input() labelVersion: string;
     @Input() labelPlaceholder: string;
     @Input() labelFavorite: string;
@@ -32,16 +42,19 @@ export class MenuRootComponent implements ControlValueAccessor {
     @Input() iconClassLarge: string;
 
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() clickMenuEvent: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 
     @ViewChild(TreeMenuComponent) private treeMenuComponent: TreeMenuComponent;
     @ViewChild('favority') private favorite: MenuItemComponent;
+    @ViewChild('inputSearch') private inputSearch: ElementRef;
+
     @ContentChild('templateMenuItem') public templateMenuItem: TemplateRef<any>;
     @ContentChild('templateFloatMain') public templateFloatMain: TemplateRef<any>;
     @ContentChild('') public templateFloatList: TemplateRef<any>;
 
     public value: Array<InternalMenuItemModel> = [];
-    public keySearch: string = "";
+    public keySearch: string = '';
     public menuItemSearch: Array<InternalMenuItemModel> = [];
     public menuItemFavorite: Array<InternalMenuItemModel> = [];
     public idRootFloatMenu: string | number;
@@ -50,12 +63,103 @@ export class MenuRootComponent implements ControlValueAccessor {
             title: this.labelFavorite || 'Favorite',
             iconClass: 'fas fa-star color-orange'
         }
-    }
+    };
 
-    constructor(private router: Router) {
+    private menuIndexSelected: number;
+    private readonly arrowsUpAndDownEvent: EventListener;
+    private readonly shortcutForSearch: EventListener;
+    private reorganizeMenu: boolean = true;
+    private propagateChange: any = () => {
+    };
+
+    constructor(
+        private router: Router,
+        private zone: NgZone,
+        private elRef: ElementRef
+    ) {
         this.router.events.subscribe(ev => {
             this.monitoringRouter(ev);
         });
+
+        this.menuIndexSelected = -1;
+        // Define callback for arrows event
+        this.arrowsUpAndDownEvent = (ev: KeyboardEvent) => {
+            switch (ev.key) {
+                case 'ArrowUp':
+                    if (this.menuIndexSelected >= 1 && this.menuIndexSelected < this.menuItemSearch.length) {
+                        this.menuIndexSelected--;
+                    } else {
+                        return;
+                    }
+                    this.menuItemSearch.forEach(item => {
+                        if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
+                            item.active = true;
+                            try {
+                                (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
+                            } catch (e) {
+                            }
+                        } else {
+                            item.active = false;
+                        }
+                    });
+                    break;
+                case 'ArrowDown':
+                    if (this.menuItemSearch &&
+                        (this.menuIndexSelected >= -1) &&
+                        (this.menuIndexSelected < this.menuItemSearch.length - 1)
+                    ) {
+                        this.menuIndexSelected++;
+                    } else {
+                        return;
+                    }
+                    this.menuItemSearch.forEach(item => {
+                        if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
+                            item.active = true;
+                            try {
+                                (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
+                            } catch (e) {
+                            }
+                        } else {
+                            item.active = false;
+                        }
+                    });
+                    break;
+                case 'Enter':
+                    if (this.keySearch && this.keySearch.trim() !== '' && this.menuIndexSelected !== -1) {
+                        this.onClickSearch(<ItemEventInterface>{
+                            mouseEvent: new MouseEvent('click'),
+                            item: this.menuItemSearch[this.menuIndexSelected].menuItemModel
+                        });
+                    }
+                    break;
+            }
+        };
+        this.shortcutForSearch = (ev: KeyboardEvent) => {
+            if (ev.ctrlKey && ev.shiftKey && (ev.key === 'f' || ev.key === 'F')) {
+                if (localStorage.getItem('menuOpen') === 'false') {
+                    try {
+                        (<HTMLButtonElement>document.querySelector(`header.hidden-xs aside button.btn-menu`)).click();
+                    } catch (e) {
+                    }
+                }
+                // this.keySearch = '';
+                this.inputSearch.nativeElement.select();
+                this.inputSearch.nativeElement.focus();
+            }
+        };
+
+        // Shortcut for search.
+        this.zone.runOutsideAngular(() => {
+            window.addEventListener('keyup', this.shortcutForSearch.bind(this));
+        });
+
+        // Arrows events.
+        this.elRef.nativeElement.addEventListener('keyup', this.arrowsUpAndDownEvent.bind(this));
+    }
+
+    ngOnDestroy(): void {
+        window.removeEventListener('keyup', this.shortcutForSearch);
+        this.elRef.nativeElement.removeEventListener('keyup', this.arrowsUpAndDownEvent);
     }
 
     private monitoringRouter(ev: NavigationEnd | any): void {
@@ -109,16 +213,16 @@ export class MenuRootComponent implements ControlValueAccessor {
 
     private mRegex(value): string {
         let accents = {
-            a: 'àáâãäåæ',
-            c: 'ç',
-            e: 'èéêëæ',
-            i: 'ìíîï',
-            n: 'ñ',
-            o: 'òóôõöø',
-            s: 'ß',
-            u: 'ùúûü',
-            y: 'ÿ'
-        },
+                a: 'àáâãäåæ',
+                c: 'ç',
+                e: 'èéêëæ',
+                i: 'ìíîï',
+                n: 'ñ',
+                o: 'òóôõöø',
+                s: 'ß',
+                u: 'ùúûü',
+                y: 'ÿ'
+            },
             chars = /[aceinosuy]/g;
         return value.replace(chars, function (c) {
             return '[' + c + accents[c] + ']';
@@ -130,33 +234,47 @@ export class MenuRootComponent implements ControlValueAccessor {
             this.favorite.setActive(false);
     }
 
-    public filterMenu(event: Event): void {
-        if (this.value == null || this.keySearch == null || this.keySearch.length == 0) {
+    public filterMenu(ev: KeyboardEvent): void {
+        if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter') {
+            return;
+        }
+
+        if (this.value == null || this.keySearch == null || this.keySearch.length === 0) {
             this.menuItemSearch = null;
             return;
         }
 
         try {
-            let exp = new RegExp(this.mRegex(this.keySearch), "ig");
-            this.menuItemSearch = this.value.filter(x => x.menuItemModel.target != null && exp.test(x.menuItemModel.title));
-        } catch (ex) { }
+            this.menuIndexSelected = -1;
+            const exp = new RegExp(this.mRegex(this.keySearch.toLowerCase()));
+            this.menuItemSearch = this.value.filter(x => {
+                x.active = false;
+                return (x.menuItemModel.target != null) && exp.test(x.menuItemModel.title.toLowerCase());
+            });
+        } catch (ex) {
+        }
     }
 
     public onClickMenu(itemEvent: ItemEventInterface): void {
         this.idRootFloatMenu = null;
         this.closeFavorite();
         this.clickMenu.next(itemEvent.item);
+        this.onClickMenuEvent(itemEvent);
     }
+
+    public onClickMenuEvent(itemEvent: ItemEventInterface): void {
+        this.clickMenuEvent.next(itemEvent);
+    }    
 
     public onClickMenuFloat(item: MenuItemModel): void {
         this.resetMenusActive();
         this.setMenuParentsActive(this.value, item.id);
-        this.onClickMenu(<ItemEventInterface>{ item: item });
+        this.onClickMenu(<ItemEventInterface>{item: item});
     }
 
     public onClickSearch(itemEvent: ItemEventInterface): void {
         this.menuItemSearch = null;
-        this.keySearch = "";
+        this.keySearch = '';
         this.onClickMenu(itemEvent);
         this.resetMenusActive();
         this.setMenuParentsActive(this.value, itemEvent.item.id);
