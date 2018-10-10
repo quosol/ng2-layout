@@ -264,12 +264,12 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
 
     public onClickMenuEvent(itemEvent: ItemEventInterface): void {
         this.clickMenuEvent.next(itemEvent);
-    }    
+    }
 
-    public onClickMenuFloat(item: MenuItemModel): void {
+    public onClickMenuFloat(item: ItemEventInterface): void {
         this.resetMenusActive();
-        this.setMenuParentsActive(this.value, item.id);
-        this.onClickMenu(<ItemEventInterface>{item: item});
+        this.setMenuParentsActive(this.value, item.item.id);
+        this.onClickMenu(item);
     }
 
     public onClickSearch(itemEvent: ItemEventInterface): void {
