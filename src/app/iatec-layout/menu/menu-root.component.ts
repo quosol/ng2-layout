@@ -42,6 +42,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     @Input() iconClassLarge: string;
 
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() clickMenuEvent: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 
     @ViewChild(TreeMenuComponent) private treeMenuComponent: TreeMenuComponent;
@@ -258,7 +259,12 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         this.idRootFloatMenu = null;
         this.closeFavorite();
         this.clickMenu.next(itemEvent.item);
+        this.onClickMenuEvent(itemEvent);
     }
+
+    public onClickMenuEvent(itemEvent: ItemEventInterface): void {
+        this.clickMenuEvent.next(itemEvent);
+    }    
 
     public onClickMenuFloat(item: MenuItemModel): void {
         this.resetMenusActive();
