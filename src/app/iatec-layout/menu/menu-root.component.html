@@ -9,8 +9,11 @@
             <!-- Favorite Menu -->
             <iatec-menu-item *ngIf="!keySearch && menuItemFavorite?.length > 0" [item]="favoriteItem" #favority>
                 <ul>
-                    <iatec-menu-item *ngFor="let item of menuItemFavorite" [item]="item"
-                                     (clickMenu)="onClickMyFavority($event)"></iatec-menu-item>
+                    <iatec-menu-item *ngFor="let item of menuItemFavorite"
+                                     [item]="item"
+                                     (clickMenu)="onClickMyFavority($event)"
+                                     (clickFavorite)="onClickFavorite($event)">
+                    </iatec-menu-item>
                 </ul>
             </iatec-menu-item>
             <!-- Tree menu -->
