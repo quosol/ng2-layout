@@ -4,7 +4,7 @@
 
 ## Installation
 
-IATec layout runs on angular 2 and is available as an NPM package. You can install @iatec/ng2-layout
+IATec layout runs on angular 2 (v5+) and is available as an NPM package. You can install @iatec/ng2-layout
 in your project's directory as usual:
 
 ```bash
