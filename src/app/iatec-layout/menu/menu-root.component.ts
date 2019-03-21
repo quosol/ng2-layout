@@ -189,7 +189,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         });
     }
 
-    private setMenuParentsActive(arr: Array<InternalMenuItemModel>, id: string | number): void {
+    public setMenuParentsActive(arr: Array<InternalMenuItemModel>, id: string | number): void {
         let item = arr.find(x => x.menuItemModel.id == id);
         if (item) {
             item[item.menuItemModel.target == null ? 'active' : 'semiActive'] = true;
@@ -258,6 +258,9 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                 x.active = false;
                 return (x.menuItemModel.target != null) && exp.test(x.menuItemModel.title.toLowerCase());
             });
+            if (this.menuItemSearch && this.menuItemSearch.length && this.keySearch && this.keySearch.length > 0) {
+                this.menuItemSearch[0].active = true;
+            }
         } catch (ex) {
         }
     }

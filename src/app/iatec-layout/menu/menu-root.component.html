@@ -1,6 +1,6 @@
 <section class="menu">
     <div class="search">
-        <input #inputSearch placeholder="{{ labelPlaceholder || 'Type your search here'}}" [(ngModel)]="keySearch"
+        <input #inputSearch id="inputSearchId" placeholder="{{ labelPlaceholder || 'Type your search here'}}" [(ngModel)]="keySearch"
                (keyup)="filterMenu($event)"/>
     </div>
     <nav>
