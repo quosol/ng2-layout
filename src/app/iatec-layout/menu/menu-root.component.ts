@@ -236,6 +236,13 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
 
     public filterMenu(ev: KeyboardEvent): void {
         if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter') {
+            if (ev.key === 'Enter' && this.menuItemSearch && this.menuItemSearch.length && this.keySearch &&
+                this.keySearch.length > 0 && this.menuItemSearch[0].active === true) {
+                this.onClickSearch({
+                    mouseEvent: new MouseEvent('click'),
+                    item: this.menuItemSearch[0].menuItemModel
+                });
+            }
             return;
         }
 
