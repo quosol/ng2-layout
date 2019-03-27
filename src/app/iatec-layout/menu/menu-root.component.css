@@ -15,7 +15,7 @@ ul.menu-root li {
 ul.menu-root li.active {  
     outline-width: 1px; 
     outline-style: auto; 
-    outline-color: '-webkit-focus-ring-color';}
+    outline-color: -webkit-focus-ring-color;}
 
 ul.menu-root li a {
     display: block;
