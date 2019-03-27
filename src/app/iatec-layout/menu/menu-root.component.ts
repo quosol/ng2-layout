@@ -12,21 +12,21 @@
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import {MenuItemModel} from '../models';
-import {InternalMenuItemModel} from '../models/internal-menu-item.model';
-import {TreeMenuComponent} from './tree-menu.component';
-import {MenuItemComponent} from './menu-item.component';
-import {ItemEventInterface} from '../interface/item-event.interface';
+import { MenuItemModel } from '../models';
+import { InternalMenuItemModel } from '../models/internal-menu-item.model';
+import { TreeMenuComponent } from './tree-menu.component';
+import { MenuItemComponent } from './menu-item.component';
+import { ItemEventInterface } from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-layout-menu',
     templateUrl: './menu-root.component.html',
     styleUrls: ['./menu-root.component.css'],
     providers: [
-        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true},
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MenuRootComponent), multi: true },
     ],
     encapsulation: ViewEncapsulation.None
 })
@@ -95,7 +95,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                         if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
                             item.active = true;
                             try {
-                                (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
+                                // (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
                             } catch (e) {
                             }
                         } else {
@@ -108,7 +108,11 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                         (this.menuIndexSelected >= -1) &&
                         (this.menuIndexSelected < this.menuItemSearch.length - 1)
                     ) {
-                        this.menuIndexSelected++;
+                        if (this.menuItemSearch[0].active && this.menuIndexSelected === -1) {
+                            this.menuIndexSelected = 1;
+                        } else {
+                            this.menuIndexSelected++;
+                        }
                     } else {
                         return;
                     }
@@ -116,7 +120,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                         if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
                             item.active = true;
                             try {
-                                (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
+                                // (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
                             } catch (e) {
                             }
                         } else {
@@ -213,16 +217,16 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
 
     private mRegex(value): string {
         let accents = {
-                a: 'àáâãäåæ',
-                c: 'ç',
-                e: 'èéêëæ',
-                i: 'ìíîï',
-                n: 'ñ',
-                o: 'òóôõöø',
-                s: 'ß',
-                u: 'ùúûü',
-                y: 'ÿ'
-            },
+            a: 'àáâãäåæ',
+            c: 'ç',
+            e: 'èéêëæ',
+            i: 'ìíîï',
+            n: 'ñ',
+            o: 'òóôõöø',
+            s: 'ß',
+            u: 'ùúûü',
+            y: 'ÿ'
+        },
             chars = /[aceinosuy]/g;
         return value.replace(chars, function (c) {
             return '[' + c + accents[c] + ']';
@@ -235,7 +239,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     }
 
     public filterMenu(ev: KeyboardEvent): void {
-        if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter') {
+        if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter' || ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
             if (ev.key === 'Enter' && this.menuItemSearch && this.menuItemSearch.length && this.keySearch &&
                 this.keySearch.length > 0 && this.menuItemSearch[0].active === true) {
                 this.onClickSearch({

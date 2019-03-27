@@ -12,6 +12,11 @@ ul.menu-root li {
     transition: .658s all;
 }
 
+ul.menu-root li.active {  
+    outline-width: 1px; 
+    outline-style: auto; 
+    outline-color: '-webkit-focus-ring-color';}
+
 ul.menu-root li a {
     display: block;
     padding: 10px;
