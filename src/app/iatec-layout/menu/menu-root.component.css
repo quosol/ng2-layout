@@ -12,10 +12,10 @@ ul.menu-root li {
     transition: .658s all;
 }
 
-ul.menu-root li.active {  
+ul.menu-root >iatec-menu-item li.active {  
     outline-width: 1px; 
     outline-style: auto; 
-    outline-color: '-webkit-focus-ring-color';}
+    outline-color: -webkit-focus-ring-color;}
 
 ul.menu-root li a {
     display: block;
