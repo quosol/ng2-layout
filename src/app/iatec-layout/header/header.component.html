@@ -147,7 +147,7 @@
             <div class="dropdown" id="headerbar" style="display: inline-block; min-width: 50%; background: none;">
                 <!-- TODO: Add current entity -->
                 <a data-toggle="dropdown" style="font-weight: 600;">{{ currentEntity?.codeEntity }}
-                    <span class="hidden-sm"> - {{ currentEntity?.name }} </span>
+                    <span *ngIf="currentEntity?.name" class="hidden-sm"> - {{ currentEntity?.name }} </span>
                     <i class="fas fa-angle-down hidden-sm" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu" style=" box-shadow: unset; color: #666666; max-height: 723px; border-radius: 0px; min-width: 400px; padding: 10px;">
