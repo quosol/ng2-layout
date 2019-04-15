@@ -1,9 +1,9 @@
 <section class="menu">
     <div class="search">
         <input #inputSearch id="inputSearchId" placeholder="{{ labelPlaceholder || 'Type your search here'}}" [(ngModel)]="keySearch"
-               (keyup)="filterMenu($event)"/>
+               (keyup)="filterUpMenu($event)" (keydown)="filterDownMenu($event)"/>
     </div>
-    <nav>
+    <nav id="navMenuRoot">
         <ul class="menu-root">
             <div *ngIf="loading" style="padding: 10px;">{{ labelLoading || 'Loading...'}}</div>
             <!-- Favorite Menu -->

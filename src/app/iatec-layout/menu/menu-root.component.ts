@@ -81,13 +81,16 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
             this.monitoringRouter(ev);
         });
 
+        this.moveScroll();
+
         this.menuIndexSelected = -1;
         // Define callback for arrows event
         this.arrowsUpAndDownEvent = (ev: KeyboardEvent) => {
             switch (ev.key) {
                 case 'ArrowUp':
-                    if (this.menuIndexSelected >= 1 && this.menuIndexSelected < this.menuItemSearch.length) {
+                    if (this.menuIndexSelected >= 1 && this.menuItemSearch && this.menuIndexSelected < this.menuItemSearch.length) {
                         this.menuIndexSelected--;
+                        this.moveScrollWithActive();
                     } else {
                         return;
                     }
@@ -112,6 +115,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
                             this.menuIndexSelected = 1;
                         } else {
                             this.menuIndexSelected++;
+                            this.moveScrollWithActive();
                         }
                     } else {
                         return;
@@ -158,12 +162,22 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         });
 
         // Arrows events.
-        this.elRef.nativeElement.addEventListener('keyup', this.arrowsUpAndDownEvent.bind(this));
+        this.elRef.nativeElement.addEventListener('keydown', this.arrowsUpAndDownEvent.bind(this));
     }
 
     ngOnDestroy(): void {
         window.removeEventListener('keyup', this.shortcutForSearch);
-        this.elRef.nativeElement.removeEventListener('keyup', this.arrowsUpAndDownEvent);
+        this.elRef.nativeElement.removeEventListener('keydown', this.arrowsUpAndDownEvent);
+    }
+
+    private moveScrollWithActive() {
+        const nav = document.getElementById('navMenuRoot');
+        if (nav) {
+            const li = nav.children[0].children[this.menuIndexSelected].children[0] as any;
+            if (li) {
+                li.scrollIntoViewIfNeeded(false);
+            }
+        }
     }
 
     private monitoringRouter(ev: NavigationEnd | any): void {
@@ -238,7 +252,14 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
             this.favorite.setActive(false);
     }
 
-    public filterMenu(ev: KeyboardEvent): void {
+    public filterDownMenu(ev: KeyboardEvent): void {
+        if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+            ev.preventDefault();
+            return;
+        }
+    }
+
+    public filterUpMenu(ev: KeyboardEvent): void {
         if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter' || ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
             if (ev.key === 'Enter' && this.menuItemSearch && this.menuItemSearch.length && this.keySearch &&
                 this.keySearch.length > 0 && this.menuItemSearch[0].active === true) {
@@ -264,6 +285,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
             });
             if (this.menuItemSearch && this.menuItemSearch.length && this.keySearch && this.keySearch.length > 0) {
                 this.menuItemSearch[0].active = true;
+                document.getElementById('navMenuRoot').scrollTop = 0;
             }
         } catch (ex) {
         }
@@ -336,6 +358,70 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     }
 
     setDisabledState?(isDisabled: boolean): void {
-        //throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
+    }
+
+    private moveScroll() {
+        (Element.prototype as any).scrollIntoViewIfNeeded = function (centerIfNeeded) {
+            'use strict';
+
+            function makeRange(start, length) {
+                return { 'start': start, 'length': length, 'end': start + length };
+            }
+
+            function coverRange(inner, outer) {
+                if (
+                    false === centerIfNeeded ||
+                    (outer.start < inner.end && inner.start < outer.end)
+                ) {
+                    return Math.max(
+                        inner.end - outer.length,
+                        Math.min(outer.start, inner.start)
+                    );
+                }
+                return (inner.start + inner.end - outer.length) / 2;
+            }
+
+            function makePoint(x, y) {
+                return {
+                    'x': x,
+                    'y': y,
+                    'translate': function translate(dX, dY) {
+                        return makePoint(x + dX, y + dY);
+                    }
+                };
+            }
+
+            function absolute(elem, pt) {
+                while (elem) {
+                    pt = pt.translate(elem.offsetLeft, elem.offsetTop);
+                    elem = elem.offsetParent;
+                }
+                return pt;
+            }
+
+            let target = absolute(this, makePoint(0, 0)),
+                extent = makePoint(this.offsetWidth, this.offsetHeight),
+                elem = this.parentNode,
+                origin;
+
+            while (elem instanceof HTMLElement) {
+                // Apply desired scroll amount.
+                origin = absolute(elem, makePoint(elem.clientLeft, elem.clientTop));
+                elem.scrollLeft = coverRange(
+                    makeRange(target.x - origin.x, extent.x),
+                    makeRange(elem.scrollLeft, elem.clientWidth)
+                );
+                elem.scrollTop = coverRange(
+                    makeRange(target.y - origin.y, extent.y),
+                    makeRange(elem.scrollTop, elem.clientHeight)
+                );
+
+                // Determine actual scroll amount by reading back scroll properties.
+                target = target.translate(-elem.scrollLeft, -elem.scrollTop);
+                elem = elem.parentNode;
+            }
+        };
+
     }
 }
