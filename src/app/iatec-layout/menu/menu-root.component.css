@@ -131,3 +131,5 @@ ul.menu-root li.active>ul {
 .color-orange {
     color: orange;
 }
+
+footer>a:hover { color: inherit !important; text-decoration: none; }

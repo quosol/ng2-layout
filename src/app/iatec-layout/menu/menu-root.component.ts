@@ -34,6 +34,8 @@ import { ItemEventInterface } from '../interface/item-event.interface';
 export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     @Input() version: string = '';
     @Input() labelVersion: string;
+    @Input() labelTermsOfUse: string = '';
+    @Input() showLinkTermsUse: boolean = false;
     @Input() labelPlaceholder: string;
     @Input() labelFavorite: string;
     @Input() labelLoading: string;
@@ -44,6 +46,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     @Output() clickMenu: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
     @Output() clickMenuEvent: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() clickTermsOfUse: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 
     @ViewChild(TreeMenuComponent) private treeMenuComponent: TreeMenuComponent;
     @ViewChild('favority') private favorite: MenuItemComponent;
@@ -331,6 +334,10 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     public onShowFloatMenu(itemEvent: ItemEventInterface): void {
         this.idRootFloatMenu = itemEvent.item.id;
         this.closeFavorite();
+    }
+
+    public onClickTermsOfUse(): void {
+        this.clickTermsOfUse.emit();
     }
 
     writeValue(value: Array<any>): void {
