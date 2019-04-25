@@ -32,6 +32,6 @@
                       [favorites]="menuItemFavorite" [ngModel]="value" [iconClassLarge]="iconClassLarge"
                       [parentId]="parentId" (clickMenu)="onClickMenuFloat($event)"></iatec-menu-float>
     <footer>
-        {{ labelVersion || 'Version' }}: {{ version || 'unknow' }}
+        <a *ngIf='showLinkTermsUse' id='termsOfUseId' (click)='onClickTermsOfUse()' class='float-xl-left'>{{ labelTermsOfUse || 'Terms of Use' }}</a><p [ngClass]="showLinkTermsUse ? 'float-xl-right': 'float-xl-center'">{{ labelVersion || 'Version' }}: {{ version || 'unknow' }}</p>
     </footer>
 </section>
