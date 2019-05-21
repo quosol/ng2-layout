@@ -70,3 +70,6 @@ Thumbs.db
 *.ngfactory.js
 *.ngfactory.js.map
 *.ngsummary.json
+
+#CI
+.travis.yml
