@@ -42,7 +42,8 @@ export class MenuItemComponent {
             this.setActive(!this.item.active);
         }
         else {
-            this.item.semiActive = true;
+            if (!ev.ctrlKey)
+                this.item.semiActive = true;
         }
         this.clickMenu.next(<ItemEventInterface>{ mouseEvent: ev, item: item.menuItemModel });
     }
