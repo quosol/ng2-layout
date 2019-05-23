@@ -35,7 +35,7 @@ export class TreeMenuComponent implements ControlValueAccessor {
     public onClick(itemEvent: ItemEventInterface): void {
         let item = itemEvent.item;
         this.menuItemComponents.forEach(mic => {
-            if (mic.item.menuItemModel != item)
+            if (!itemEvent.mouseEvent.ctrlKey && mic.item.menuItemModel != item)
                 mic.setActive(mic.item.menuItemModel == item);
         });
 
