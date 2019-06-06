@@ -149,7 +149,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
             if (ev.ctrlKey && ev.shiftKey && (ev.key === 'f' || ev.key === 'F')) {
                 if (localStorage.getItem('menuOpen') === 'false') {
                     try {
-                        (<HTMLButtonElement>document.querySelector(`header.hidden-xs aside button.btn-menu`)).click();
+                        (<HTMLButtonElement>document.querySelector('header.hidden-xs aside button.btn-menu')).click();
                     } catch (e) {
                     }
                 }

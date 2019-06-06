@@ -16,7 +16,6 @@ import { ItemEventInterface } from '../interface/item-event.interface';
             <ng-content></ng-content>
         </li>
     `,
-    styles: [``]
 })
 export class MenuItemComponent {
     @Input() item: InternalMenuItemModel;
