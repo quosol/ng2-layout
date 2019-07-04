@@ -7,6 +7,8 @@ cache:
 deploy:
     on:
         branch: master
+        tags: true
+        
     provider: npm
     email: 
         - secure: "pvYbI1tE6/ev7QIp+EHlEdlz1eoUV6hOJPejM3kiFrIVf2VwRD08WjeI4lh5MdXYpbbmGJj+CQm953bOqk6UGghBxKxrtZ66nHPcEbCQsXTnm1sSchB2xn4wPxHf5nhnJCKHNTQnz6voPDRKEeLLkPlLb4g5psx9F2RzHGuhbDTO1pWfAZB86uFDU66XzdDXAV/AEyEskh/qXoZVolJqjsVWBZt7Eqs1pgSOXSI0uDodwOkhYAEwcVrsWHv1QukvTZgxk8X//HU+HjuerjUEamI7RbkVVWJ8UbdDm6WKoiybsr2JUL3vmMrN/JHcxqXgHs+QpwOLIM+RY04t3I/csexiUkFTfMXFUe7uzC9Hazx0vYHmjiyPF+lGfQEUvQnycnfMnOPwIxu3MJWiR4HNFTMuogj+C94pk69Xli55Q9uVh7QETpv/juKPR4gzQYtc7AdUFTU6sTNBkEbS8IK/9YKBh/tuvAG2GXBi5aX4raZ+JaL6ebuO7koxO3COiaEuwhXDKvN98OLxt2CWUCmY1wi6Cms/ZTH6MwMgRO+/Ubww/v/TnNk6Xa8rM65gvfzHlX387I0iEp2dWzizgzE7w4YZlcEPWxPeimdYZf0PkdI9L7SiZUgry0yPHwsx+ojNLOCLzTaQu53DEUGv3k6Hk2v20hOQtKI/ebHWkojRsLw="
