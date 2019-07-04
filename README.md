@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/%40iatec%2Fng2-layout.svg)](https://badge.fury.io/js/%40iatec%2Fng2-layout)
+[![npm version](https://badge.fury.io/js/%40iatec%2Fng2-layout.svg)](https://badge.fury.io/js/%40iatec%2Fng2-layout) [![Build Status](https://travis-ci.org/iatecbr/ng2-layout.svg?branch=master)](https://travis-ci.org/iatecbr/ng2-layout)
 
 # LayoutIATec
 
