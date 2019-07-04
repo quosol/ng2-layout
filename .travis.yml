@@ -4,3 +4,12 @@ node_js:
 cache:
     directories:
         - "node_modules"
+deploy:
+    on:
+        branch: master
+    provider: npm
+    email: 
+        - secure: "pvYbI1tE6/ev7QIp+EHlEdlz1eoUV6hOJPejM3kiFrIVf2VwRD08WjeI4lh5MdXYpbbmGJj+CQm953bOqk6UGghBxKxrtZ66nHPcEbCQsXTnm1sSchB2xn4wPxHf5nhnJCKHNTQnz6voPDRKEeLLkPlLb4g5psx9F2RzHGuhbDTO1pWfAZB86uFDU66XzdDXAV/AEyEskh/qXoZVolJqjsVWBZt7Eqs1pgSOXSI0uDodwOkhYAEwcVrsWHv1QukvTZgxk8X//HU+HjuerjUEamI7RbkVVWJ8UbdDm6WKoiybsr2JUL3vmMrN/JHcxqXgHs+QpwOLIM+RY04t3I/csexiUkFTfMXFUe7uzC9Hazx0vYHmjiyPF+lGfQEUvQnycnfMnOPwIxu3MJWiR4HNFTMuogj+C94pk69Xli55Q9uVh7QETpv/juKPR4gzQYtc7AdUFTU6sTNBkEbS8IK/9YKBh/tuvAG2GXBi5aX4raZ+JaL6ebuO7koxO3COiaEuwhXDKvN98OLxt2CWUCmY1wi6Cms/ZTH6MwMgRO+/Ubww/v/TnNk6Xa8rM65gvfzHlX387I0iEp2dWzizgzE7w4YZlcEPWxPeimdYZf0PkdI9L7SiZUgry0yPHwsx+ojNLOCLzTaQu53DEUGv3k6Hk2v20hOQtKI/ebHWkojRsLw="
+    api_key: 
+        - secure: "UkUifyVe7D0viWsrN8CBVVf0o9z58+55xcvVEOzzKFbFRhdKzAcGdk+La3VEJY52ngtNGbKmtCShGH2pseb76JfnzcG3WgFsm+fvNy+jZvgjeEdppwNE0pC2RxmIKT3bB9BZXCOqI3ek4TpQlNsUlYuhFMDhO0jIbU7UIZkAKTsd++Sx3tAG7hWpitNKphJ3pKsNYo3T343aEphHG9jWBEZkwnCqziArIFvi+vqyjjdvFfYrk/AodrIpLOte12EMlk8029BnRLpYm8F7rDZK3vAesYDtySezXPug7hDcZKkdhG2/Z3GIRRf/6w51X7pYzbS7vsI/xPNtgcG8rv0NPCJp0kIqvhibQd7ABiT/40v5m7vYSpZkpZ42DiMpdxYMfT7cv36x3674eiN+fvQTGIrPUdARIoPhgpuQZ/D+xsGpUg5qATJlA8emRcX7MP2IdpDWx+9uN2cZC90OSauZbPsH6dV5lB7gcxNu40LJFveBFXhLLVaz8LRVBgGj+rZboTktD6cdHy5lRtNh8x5TuHIDIPFd4EAmFbzW/PbyYS9OBSE1ny0MFDmp0iCBq2bKDPHAePCU2QhFEVRvcfPZAUwAunTULfGXXE+Vv4NCZjVXqzlbOSbF3NdP1Iohqxfzh7mmoIn9LaFmD8M0gIir+YMLeMBOdzXEUo50Wi8TkaY="
+    tag: next

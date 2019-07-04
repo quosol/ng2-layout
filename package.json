@@ -6,6 +6,9 @@
         "name": "Flávio Silva",
         "url": "http://flaviosilva.net"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "prepublish": "gulp js:build && ngc --p tsconfig-aot.json"
     },
