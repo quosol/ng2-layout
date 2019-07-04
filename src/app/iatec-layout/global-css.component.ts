@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'iatec-layout-css',
     template: `<!-- IATec CSS -->`,
-    styleUrls: [`./global-css.component.css`],
+    styleUrls: ['./global-css.component.css'],
     encapsulation: ViewEncapsulation.None
 })
 

@@ -1,5 +1,8 @@
 var gulp = require('gulp');
 var inlineNg2Template = require('gulp-inline-ng2-template');
+var Set = require('es6-set/polyfill');
+
+require('es6-promise').polyfill();
 
 gulp.task('js:build', function () {
     return new Promise(function(resolve, reject) {

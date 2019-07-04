@@ -1,6 +1,6 @@
 {
     "name": "@iatec/ng2-layout",
-    "version": "0.0.42",
+    "version": "0.0.44",
     "license": "MIT",
     "author": {
         "name": "Flávio Silva",
@@ -54,6 +54,8 @@
         "ts-node": "~3.2.0",
         "tslint": "~5.3.2",
         "typescript": "~2.4.2",
-        "zone.js": "^0.8.14"
+        "zone.js": "^0.8.14",
+        "es6-promise": "~4.2.6",
+        "es6-set": "^0.1.5"
     }
 }
