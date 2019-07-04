@@ -1,7 +1,8 @@
 <section class="menu">
     <div class="search">
-        <input #inputSearch id="inputSearchId" placeholder="{{ labelPlaceholder || 'Type your search here'}}" [(ngModel)]="keySearch"
-               (keyup)="filterUpMenu($event)" (keydown)="filterDownMenu($event)"/>
+        <input #inputSearch id="inputSearchId" name="inputSearchId" placeholder="{{ labelPlaceholder || 'Type your search here'}}"
+               [(ngModel)]="keySearch" (focusin)="onFocusInSearchInput($event)" (focusout)="onFocusOutSearchInput($event)"
+               (keyup)="filterUpMenu($event)" (keydown)="filterDownMenu($event)" (ngModelChange)="changeFilter($event)"/>
     </div>
     <nav id="navMenuRoot">
         <ul class="menu-root">
@@ -19,7 +20,7 @@
             <!-- Tree menu -->
             <iatec-tree-menu *ngIf="!keySearch" [ngModel]="value" [parentId]="parentId"
                              [templateMenuItem]="templateMenuItem" (clickMenu)="onClickMenu($event)"
-                             (clickFavorite)="onClickFavorite($event)"
+                             (clickFavorite)="onClickFavorite($event)" (itemLostFocus)="onFocusOutMenuItem()"
                              (showFloatMenu)="onShowFloatMenu($event)"></iatec-tree-menu>
             <!-- Search Menu -->
             <iatec-menu-item *ngFor="let item of menuItemSearch; let i= index" [item]="item"

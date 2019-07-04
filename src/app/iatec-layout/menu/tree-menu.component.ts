@@ -1,11 +1,10 @@
-﻿import { Component, forwardRef, Input, ContentChildren, QueryList, ViewChildren, EventEmitter, Output, TemplateRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+﻿import {Component, EventEmitter, forwardRef, Input, Output, QueryList, TemplateRef, ViewChildren} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
-import { MenuItemModel } from '../models';
-import { InternalMenuItemModel } from '../models/internal-menu-item.model';
-import { MenuItemComponent } from './menu-item.component';
-import { ItemEventInterface } from '../interface/item-event.interface';
+import {MenuItemModel} from '../models';
+import {InternalMenuItemModel} from '../models/internal-menu-item.model';
+import {MenuItemComponent} from './menu-item.component';
+import {ItemEventInterface} from '../interface/item-event.interface';
 
 @Component({
     selector: 'iatec-tree-menu',
@@ -31,6 +30,7 @@ export class TreeMenuComponent implements ControlValueAccessor {
     @Output() showFloatMenu: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickMenu: EventEmitter<ItemEventInterface> = new EventEmitter<ItemEventInterface>();
     @Output() clickFavorite: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
+    @Output() itemLostFocus: EventEmitter<MenuItemModel> = new EventEmitter<MenuItemModel>();
 
     public onClick(itemEvent: ItemEventInterface): void {
         let item = itemEvent.item;
@@ -82,5 +82,9 @@ export class TreeMenuComponent implements ControlValueAccessor {
 
     setDisabledState?(isDisabled: boolean): void {
         //throw new Error('Method not implemented.');
+    }
+
+    onFocusOutMenuItem(data: MenuItemModel): void {
+        this.itemLostFocus.emit(data);
     }
 }

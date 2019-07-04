@@ -12,14 +12,14 @@
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { MenuItemModel } from '../models';
-import { InternalMenuItemModel } from '../models/internal-menu-item.model';
-import { TreeMenuComponent } from './tree-menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { ItemEventInterface } from '../interface/item-event.interface';
+import {NavigationEnd, Router} from '@angular/router';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {MenuItemModel} from '../models';
+import {InternalMenuItemModel} from '../models/internal-menu-item.model';
+import {TreeMenuComponent} from './tree-menu.component';
+import {MenuItemComponent} from './menu-item.component';
+import {ItemEventInterface} from '../interface/item-event.interface';
+import {KeyEnum} from '../enumerators/key.enum';
 
 @Component({
     selector: 'iatec-layout-menu',
@@ -68,12 +68,12 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         }
     };
 
-    private menuIndexSelected: number;
+    private searchMenuIndex: number;
+    private currentMenu: InternalMenuItemModel;
     private readonly arrowsUpAndDownEvent: EventListener;
     private readonly shortcutForSearch: EventListener;
     private reorganizeMenu: boolean = true;
-    private propagateChange: any = () => {
-    };
+    private propagateChange: any = () => {};
 
     constructor(
         private router: Router,
@@ -86,97 +86,109 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
 
         this.moveScroll();
 
-        this.menuIndexSelected = -1;
-        // Define callback for arrows event
+        this.searchMenuIndex = -1;
+        // Define callback for arrows event.
         this.arrowsUpAndDownEvent = (ev: KeyboardEvent) => {
-            switch (ev.key) {
-                case 'ArrowUp':
-                    if (this.menuIndexSelected >= 1 && this.menuItemSearch && this.menuIndexSelected < this.menuItemSearch.length) {
-                        this.menuIndexSelected--;
-                        this.moveScrollWithActive();
-                    } else {
-                        return;
-                    }
-                    this.menuItemSearch.forEach(item => {
-                        if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
-                            item.active = true;
-                            try {
-                                // (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
-                            } catch (e) {
-                            }
+            if ((ev.key && ev.key === 'ArrowUp') || ev.keyCode === KeyEnum.UP_ARROW) {
+                if (this.searchMenuIndex >= 1 && this.menuItemSearch && this.searchMenuIndex < this.menuItemSearch.length) {
+                    this.searchMenuIndex--;
+                    this.moveScrollWithActive();
+                } else {
+                    return;
+                }
+                this.menuItemSearch.forEach(item => {
+                    item.active = <boolean>(item.menuItemModel.id === this.menuItemSearch[this.searchMenuIndex].menuItemModel.id);
+                });
+                return;
+            }
+            if ((ev.key && ev.key === 'ArrowDown') || ev.keyCode === KeyEnum.DOWN_ARROW) {
+                if (this.menuItemSearch && this.menuItemSearch.length > 1) {
+                    if ((this.searchMenuIndex >= -1) && (this.searchMenuIndex < this.menuItemSearch.length - 1)) {
+                        if (this.menuItemSearch.length === 1) {
+                            this.searchMenuIndex = 0;
+                        } else if (this.menuItemSearch[0].active && this.searchMenuIndex === -1) {
+                            this.searchMenuIndex = 1;
                         } else {
-                            item.active = false;
-                        }
-                    });
-                    break;
-                case 'ArrowDown':
-                    if (this.menuItemSearch &&
-                        (this.menuIndexSelected >= -1) &&
-                        (this.menuIndexSelected < this.menuItemSearch.length - 1)
-                    ) {
-                        if (this.menuItemSearch[0].active && this.menuIndexSelected === -1) {
-                            this.menuIndexSelected = 1;
-                        } else {
-                            this.menuIndexSelected++;
+                            this.searchMenuIndex++;
                             this.moveScrollWithActive();
                         }
                     } else {
                         return;
                     }
                     this.menuItemSearch.forEach(item => {
-                        if (item.menuItemModel.id === this.menuItemSearch[this.menuIndexSelected].menuItemModel.id) {
-                            item.active = true;
-                            try {
-                                // (<HTMLElement>document.querySelector(`[data-menu-index="${this.menuIndexSelected}"]`)).focus();
-                            } catch (e) {
-                            }
-                        } else {
-                            item.active = false;
+                        if (this.menuItemSearch[this.searchMenuIndex]) {
+                            item.active = (item.menuItemModel.id === this.menuItemSearch[this.searchMenuIndex].menuItemModel.id);
                         }
                     });
-                    break;
-                case 'Enter':
-                    if (this.keySearch && this.keySearch.trim() !== '' && this.menuIndexSelected !== -1) {
-                        this.onClickSearch(<ItemEventInterface>{
-                            mouseEvent: new MouseEvent('click'),
-                            item: this.menuItemSearch[this.menuIndexSelected].menuItemModel
-                        });
+                } else {
+                    if (document.activeElement.id === 'inputSearchId') {
+                        (<HTMLElement>this.elRef.nativeElement.firstElementChild.children[1]
+                            .firstElementChild.firstElementChild.children[0]).focus();
                     }
-                    break;
+                }
+                return;
+            }
+            if ((ev.key && ev.key === 'Enter') || ev.keyCode === KeyEnum.ENTER) {
+                if (this.menuItemSearch && this.menuItemSearch.length > 1) {
+                    if (this.keySearch && this.keySearch.trim() !== '' && this.searchMenuIndex !== -1) {
+                        const itemToSend = this.menuItemSearch[this.searchMenuIndex].menuItemModel;
+                        this.onClickSearch(<ItemEventInterface>{
+                            mouseEvent: new MouseEvent('click', {relatedTarget: ev.target}),
+                            item: itemToSend
+                        });
+                        this.moveScrollWithId(itemToSend.id);
+                    }
+                } else if (this.menuItemSearch && this.menuItemSearch.length === 1) {
+                    const itemToSend = this.menuItemSearch[this.searchMenuIndex].menuItemModel;
+                    this.onClickSearch(<ItemEventInterface>{
+                        mouseEvent: new MouseEvent('click', {relatedTarget: ev.target}),
+                        item: itemToSend
+                    });
+                    this.moveScrollWithId(itemToSend.id);
+                }
+                return;
             }
         };
+        // Global KeyDown event.
         this.shortcutForSearch = (ev: KeyboardEvent) => {
-            if (ev.ctrlKey && ev.shiftKey && (ev.key === 'f' || ev.key === 'F')) {
+            if (((ev.key && ev.key.toUpperCase() === 'F') || (ev.keyCode === KeyEnum.F)) && ev.ctrlKey && ev.shiftKey) {
                 if (localStorage.getItem('menuOpen') === 'false') {
                     try {
                         (<HTMLButtonElement>document.querySelector('header.hidden-xs aside button.btn-menu')).click();
                     } catch (e) {
                     }
                 }
-                // this.keySearch = '';
                 this.inputSearch.nativeElement.select();
                 this.inputSearch.nativeElement.focus();
             }
         };
-
-        // Shortcut for search.
+        // Register out of ngZone
         this.zone.runOutsideAngular(() => {
-            window.addEventListener('keyup', this.shortcutForSearch.bind(this));
+            window.addEventListener('keydown', this.shortcutForSearch.bind(this));
         });
-
-        // Arrows events.
-        this.elRef.nativeElement.addEventListener('keydown', this.arrowsUpAndDownEvent.bind(this));
     }
 
     ngOnDestroy(): void {
         window.removeEventListener('keyup', this.shortcutForSearch);
-        this.elRef.nativeElement.removeEventListener('keydown', this.arrowsUpAndDownEvent);
+    }
+
+    private moveScrollWithId(id: string | number, centerScroll = false): void {
+        // Waiting for next application tick (ngZone).
+        setTimeout(() => {
+            const nav = document.getElementById('navMenuRoot');
+            if (nav) {
+                const li: any = nav.querySelector('iatec-menu-item[tabindex="' + id + '"]');
+                if (li) {
+                    li.firstElementChild.scrollIntoViewIfNeeded(centerScroll);
+                }
+            }
+        }, 0);
     }
 
     private moveScrollWithActive() {
         const nav = document.getElementById('navMenuRoot');
         if (nav) {
-            const li = nav.children[0].children[this.menuIndexSelected].children[0] as any;
+            const li: any = nav.children[0].children[this.searchMenuIndex].children[0];
             if (li) {
                 li.scrollIntoViewIfNeeded(false);
             }
@@ -264,13 +276,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
 
     public filterUpMenu(ev: KeyboardEvent): void {
         if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown' || ev.key === 'Enter' || ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
-            if (ev.key === 'Enter' && this.menuItemSearch && this.menuItemSearch.length && this.keySearch &&
-                this.keySearch.length > 0 && this.menuItemSearch[0].active === true) {
-                this.onClickSearch({
-                    mouseEvent: new MouseEvent('click'),
-                    item: this.menuItemSearch[0].menuItemModel
-                });
-            }
+            this.arrowsUpAndDownEvent.call(this, ev);
             return;
         }
 
@@ -280,7 +286,9 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         }
 
         try {
-            this.menuIndexSelected = -1;
+            if (this.menuItemSearch) {
+                this.searchMenuIndex = 0;
+            }
             const exp = new RegExp(this.mRegex(this.keySearch.toLowerCase()));
             this.menuItemSearch = this.value.filter(x => {
                 x.active = false;
@@ -297,17 +305,15 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     public onClickMenu(itemEvent: ItemEventInterface): void {
         this.idRootFloatMenu = null;
         this.closeFavorite();
-        this.clickMenu.next(itemEvent.item);
-        this.onClickMenuEvent(itemEvent);
-    }
-
-    public onClickMenuEvent(itemEvent: ItemEventInterface): void {
-        this.clickMenuEvent.next(itemEvent);
+        this.clickMenu.emit(itemEvent.item);
+        this.currentMenu = this.value.filter(d => d.menuItemModel.id === itemEvent.item.id)[0];
+        this.clickMenuEvent.emit(itemEvent);
     }
 
     public onClickMenuFloat(item: ItemEventInterface): void {
         if (!item.mouseEvent.ctrlKey) {
             this.resetMenusActive();
+            this.currentMenu = this.value.filter(d => d.menuItemModel.id === item.item.id)[0];
             this.setMenuParentsActive(this.value, item.item.id);
         }
         this.onClickMenu(item);
@@ -317,8 +323,15 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
         this.menuItemSearch = null;
         this.keySearch = '';
         this.onClickMenu(itemEvent);
-        this.resetMenusActive();
-        this.setMenuParentsActive(this.value, itemEvent.item.id);
+        if (!itemEvent.mouseEvent.ctrlKey) {
+            this.resetMenusActive();
+            this.setMenuParentsActive(this.value, itemEvent.item.id);
+        } else {
+            const oldItem = this.value.filter(x => x.active || x.semiActive)[0];
+            if (oldItem) {
+                this.setMenuParentsActive(this.value, oldItem.menuItemModel.id);
+            }
+        }
     }
 
     public onClickFavorite(item: MenuItemModel): void {
@@ -371,7 +384,7 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
     }
 
     private moveScroll() {
-        (Element.prototype as any).scrollIntoViewIfNeeded = function (centerIfNeeded) {
+        (<any>Element.prototype).scrollIntoViewIfNeeded = function (centerIfNeeded) {
             'use strict';
 
             function makeRange(start, length) {
@@ -432,5 +445,37 @@ export class MenuRootComponent implements ControlValueAccessor, OnDestroy {
             }
         };
 
+    }
+
+    changeFilter(filter: string): void {
+        if (filter === '') {
+            this.searchMenuIndex = -1;
+        }
+    }
+
+    onFocusInSearchInput(ev: FocusEvent): void {
+        ev.stopPropagation();
+        this.searchMenuIndex = -1;
+        this.value.map(d => d.active = d.semiActive = false);
+    }
+
+    private setSavedItem(): void {
+        this.value.map(d => d.semiActive = false);
+        this.setMenuParentsActive(this.value, this.currentMenu.menuItemModel.id);
+        this.moveScrollWithId(this.currentMenu.menuItemModel.id, true);
+    }
+
+    onFocusOutSearchInput(ev: FocusEvent): void {
+        ev.stopPropagation();
+        if (this.currentMenu
+            && (!ev.relatedTarget || (ev.relatedTarget && (<HTMLElement>ev.relatedTarget).nodeName !== 'IATEC-MENU-ITEM'))) {
+            this.setSavedItem();
+        }
+    }
+
+    onFocusOutMenuItem(): void {
+        if (this.currentMenu) {
+            this.setSavedItem();
+        }
     }
 }
