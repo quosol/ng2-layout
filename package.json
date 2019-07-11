@@ -1,18 +1,15 @@
 {
     "name": "@iatec/ng2-layout",
-    "version": "0.0.44",
+    "version": "0.0.45",
     "license": "MIT",
     "author": {
         "name": "Flávio Silva",
         "url": "http://flaviosilva.net"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e",
         "prepublish": "gulp js:build && ngc --p tsconfig-aot.json"
     },
     "repository": {
