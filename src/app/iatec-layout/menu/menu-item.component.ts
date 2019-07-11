@@ -63,7 +63,7 @@ export class MenuItemComponent {
     @HostListener('focusout', ['$event'])
     focusOut(ev: FocusEvent): void {
         ev.stopPropagation();
-        if (!ev.relatedTarget || (ev.relatedTarget && (<HTMLElement>ev.relatedTarget).nodeName !== 'IATEC-MENU-ITEM')) {
+        if (!ev.target || (ev.target && (<HTMLElement>ev.target).nodeName !== 'IATEC-MENU-ITEM')) {
             this.setActive(false);
             if (this.withFocusEvent) {
                 this.focusOutMenuItem.emit(this.item.menuItemModel);
