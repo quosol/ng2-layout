@@ -50,7 +50,7 @@
         "rxjs": "5.5.12",
         "ts-node": "3.2.2",
         "tslint": "5.3.2",
-        "typescript": "2.4.2",
+        "typescript": "2.9.2",
         "zone.js": "0.8.29",
         "es6-promise": "4.2.8",
         "es6-set": "0.1.5"
